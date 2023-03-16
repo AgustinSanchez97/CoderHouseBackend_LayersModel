@@ -1,0 +1,31 @@
+
+<div class="bg-dark">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-12 p-3"> 
+          <form class="text-white rounded-4 my-5 cardStyle" >
+            <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
+              Inicio de sesion
+            </p>
+            <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+              </div>
+
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                <div id="emailHelp" class="form-text text-danger">Nunca compartiremos esta información</div>
+              </div>
+
+              <div class="pb-3 mx-3 d-flex justify-content-end">
+                <a class="btn btn-dark mx-3 " href="/session/current" id="currentCookie" style="background-color: rgb(74, 141, 35);">Current</a>
+                <a class="btn btn-dark mx-3 " href="/session/github" style="background-color: rgb(15, 15, 15);">Entrar con GitHub </a>
+                <a class="btn btn-success mx-3 " href="/register">Registrarse</a>
+                <button id="login" class="btn btn-primary ">Iniciar Sesion</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/login.js"></script>

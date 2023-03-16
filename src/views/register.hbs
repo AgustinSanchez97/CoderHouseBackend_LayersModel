@@ -1,0 +1,47 @@
+
+
+<div class="bg-dark">
+
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-12 p-3"> 
+          <form class="text-white rounded-4 my-5 cardStyle" action="/session/register" method="post">
+            <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
+              Registrarse
+            </p>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputEmail1" class="form-label">Primer nombre</label>
+                <input required type="text" name="first_name" class="form-control" placeholder="First Name">                
+              </div>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+              </div>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Edad</label>
+                <input type="number" class="form-control" name="age" placeholder="Age">
+              </div>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" placeholder="Email">
+              </div>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="text" class="form-control" name="password" placeholder="Password">
+                <div id="emailHelp" class="form-text text-danger">Nunca compartiremos esta información</div>
+              </div>
+              <div class="mb-3 mx-3">
+                
+                <select class="form-select" name="role" >
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+
+                </select>
+              </div>
+              <div class="pb-3 mx-3 d-flex justify-content-end">
+                
+                <button type="submit" class="btn btn-primary ">Registrarse</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>

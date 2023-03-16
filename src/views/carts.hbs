@@ -1,0 +1,45 @@
+<div>
+    <h1>Productos Agregados</h1>
+
+    <div class="p2">
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>        
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each carts}}
+            <tr>
+                <td>Cart #{{this.id}} </td>
+
+                <td>
+                    <a href="/editCart/{{this.id}}" class="btn btn-success">Edit</a>
+                    {{!-- <a href="/api/carts/deleteCart/{{this.id}}" class="btn btn-danger">Delete</a> --}}                                        
+                    <button class="deleteCart btn btn-danger" id="{{this.id}}" data-id="{{@index}}">Delete</button>
+
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+    {{!-- <div class="">
+        <a href="/carts/?page={{carts.prevPage}}&&limit={{carts.limit}}">Prev</a>
+        <a href="/carts/?page={{carts.nextPage}}&&limit={{carts.limit}}">Next</a>
+        <h5>{{carts.page}}/ {{carts.totalPages}}</h5>
+    </div> --}}
+
+    <hr>
+    <div>
+        <form class="row p-3" action="/api/carts" method="POST">            
+            <input type="submit" value="CREAR NUEVO CARRO" class="btn btn-success">
+        </form>
+    </div>
+</div>
+
+<script src="/js/carts.js"></script>
+

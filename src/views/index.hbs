@@ -1,0 +1,98 @@
+<div>
+    <div class="d-flex justify-content-between mx-4 ">
+        <h1>Bienvenide {{user.first_name}} {{user.last_name}} </h1>
+
+        <a class="btn btn-primary mt-2 mb-1" href="/login">Ingresar</a>
+    </div>
+    <div class="d-flex justify-content-between mx-4 ">
+        <h3 class="">Productos Agregados</h3>
+        <a class="btn btn-success mt-2 mb-1" href="/profile">Ver usuario</a>
+
+    </div>
+    <hr>
+    <div class="p2">
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FILTROS</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="hidden" id="actualCategory" value="{{actualCategory}}">
+                        <select required="required" name="cart" id="allCategory">
+                    <option value="todos" selected>Select a category</option>
+                    {{#each allCategories}}
+                        <option value="{{this}}" data-id="{{this}}">{{this}} </option>
+                    {{/each}} 
+                </select>
+                </td>                
+                    <td>
+                        <input type="hidden" id="actualSort" value="{{actualOrder}}">
+                        <select required="required" name="cart" id="allSort">
+                        <option value="">Select order</option>
+                        <option value=1 data-id="{{price}}">Menor a mayor </option>
+                        <option value=-1 data-id="{{price}}">Mayor a menor </option>
+                    </td>
+                    <td></td>
+                    
+                </tr>
+            {{#each products.docs}}
+            <tr>
+                <td>{{this.id}} </td>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                <td >{{this.category}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.stock}}</td>
+                <td>
+                    <a href="/edit/{{this.id}}" class="btn btn-success">Edit</a>
+                    <a href="/delete/{{this.id}}" class="btn btn-danger">Delete</a>
+                    <a href="/add/{{this.id}}" class="btn btn-warning">Add</a>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="">
+        {{!-- <button class="btn btn-primary" id="prevPage" data-id="/?page={{products.prevPage}}&&limit={{products.limit}}">Previous</button>
+        <button class="btn btn-primary" id="nextPage" data-id="/?page={{products.nextPage}}&&limit={{products.limit}}">Next</button> --}}
+
+        <a id="prevPage"class="btn btn-primary" href="/?page={{products.prevPage}}&&limit={{products.limit}}&&category={{actualCategory}}&&sortMethod={{actualSort}}">Prev</a>
+        <a id="nextPage"class="btn btn-primary" href="/?page={{products.nextPage}}&&limit={{products.limit}}&&category={{actualCategory}}&&sortMethod={{actualSort}}">Next</a>
+
+        <h5>{{products.page}}/ {{products.totalPages}}</h5>
+    </div>
+    <hr>
+
+
+
+    <div>
+        <form class="row mx-auto w-75" action="/api/products" method="POST">
+            <input class="form-control my-1" type="text" name="title" placeholder="title...">
+            <input class="form-control my-1" type="text" name="description" placeholder="description...">
+            <input class="form-control my-1" type="text" name="category" placeholder="category...">
+            <input class="form-control my-1" type="number" name="price" placeholder="price...">
+            <input class="form-control my-1" type="number" name="stock" placeholder="stock...">
+            <input type="submit" value="Send" class="btn btn-primary"> 
+        </form>
+    </div>
+    
+</div>
+
+<script src="/js/index.js"></script>
+
+

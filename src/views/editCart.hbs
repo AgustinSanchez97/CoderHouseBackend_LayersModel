@@ -1,0 +1,37 @@
+<div class="p2">
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>      
+                    <th>Quantity</th>        
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>Entire Cart #{{cart.id}} </td>
+                <td></td>
+                <td>                                  
+                    <button class="btn btn-danger" id="deleteCart" data-id="{{cart.id}}">Delete All Card Products</button>
+                </td>
+            </tr>
+            {{#each productsData}}
+            <tr>
+                <td>Cart #{{this._productId}} </td>
+                <td>Products in cart {{this.product}}</td>
+
+                <td>
+                    <a href="/add/{{this._productId}}" class="btn btn-success">Edit</a>
+                    <button class="deleteProductsFromCart btn btn-danger" id="{{this._productId}}" data-id="{{@index}}">Delete</button>
+
+                </td>
+            </tr>
+            
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+<script src="/js/editCart.js"></script>
