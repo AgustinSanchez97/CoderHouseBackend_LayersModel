@@ -1,5 +1,4 @@
-import productsValidator from "../validators/products.validator.js";
-import cartDao from "../daos/dbManager/carts.dao.js";
+import cartDao from "../daos/classes/carts.dao.js";
 import cartsValidator from "../validators/carts.validator.js";
 
 

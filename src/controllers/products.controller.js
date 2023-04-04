@@ -1,6 +1,7 @@
 import productsValidator from "../validators/products.validator.js";
-import cartDao from "../daos/dbManager/carts.dao.js";
+import cartDao from "../daos/classes/carts.dao.js";
 
+import productDao from "../daos/classes/products.dao.js";
 
 class productsController {
     async getAllByPages(req,res)
@@ -49,6 +50,24 @@ class productsController {
         }
     }
 
+    async update(req,res)
+    {
+        try{            
+            
+            const product = await productDao.update(req.params.id,req.body)
+            //res.render("edit", {title:"EditProduct",product} )
+            
+            await res.redirect("/")
+
+            
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+
+
     async deleteById(req,res)
     {
         try{
@@ -61,13 +80,25 @@ class productsController {
         }
     }
 
+    async createProduct(req,res)
+    {        
+        try{
+            await productDao.create(req.body)
+            res.redirect("/")
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
     async addProduct(req,res)
     {
+        console.log("hola")
         try{
             const carts = await cartDao.getAll()
 
             let allCarts = [...carts]
-            const product = await productsValidator.getById(req.params.id)
+            const product = await productDao.getById(req.params.id)
             let cartsProducts = []
 
             for (let index = 0; index < allCarts.length; index++) {
@@ -107,6 +138,7 @@ class productsController {
             console.log(error)
         }
     }
+    
 }
 
 

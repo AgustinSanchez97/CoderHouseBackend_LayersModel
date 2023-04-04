@@ -1,6 +1,10 @@
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config(
+    {
+        
+    }
+)
 
 export default {
     port:process.env.PORT,

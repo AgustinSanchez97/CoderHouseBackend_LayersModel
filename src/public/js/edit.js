@@ -25,7 +25,7 @@ sendEvent.addEventListener("click",(event)=>{
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    //.then(res => res.json())
     .then(data => {
         window.location.href = "/"
     })

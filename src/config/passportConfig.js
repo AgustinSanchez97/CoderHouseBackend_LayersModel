@@ -1,6 +1,6 @@
 import passport, { Passport } from "passport";
 import local from "passport-local"
-import { userModel } from "../models/user.model.js"
+import { userModel } from "../daos/models/user.model.js"
 import { hashPassword,comparePassword } from "../utils.js";
 import GitHubStrategy from "passport-github2"
 

@@ -1,13 +1,57 @@
-import { Router } from "express";
-//import productsDao from "../daos/dbManager/products.dao.js";
 import productsController from "../controllers/products.controller.js";
-import cartDao from "../daos/dbManager/carts.dao.js";
-
 import cartsController from "../controllers/carts.controller.js";
+import Router from "./router.js";
+//import { Router } from "express";
+//const router = Router()
 
-const router = Router()
 
+
+export default class viewRoutes extends Router {
+    init() {
+        /*
+      this.get('/', ['PUBLIC'], this.getAllUsers);
+      this.get('/currentUser', ['USER', 'USER_PREMIUM'], (req, res) => {
+        res.sendSuccess(req.user);
+      });*/
+      
+        this.get("/",['PUBLIC'], productsController.getAllByPages)
+        this.get("/add/:id", productsController.addProduct)
+        this.get("/edit/:id", productsController.getById)
+        this.get("/delete/:id", productsController.deleteById)
+
+
+        this.get("/api/carts/" ,cartsController.getAllCarts)
+        this.get("/editCart/:id",cartsController.editCartById)
+        this.get("/api/carts/:cid",cartsController.deleteCartById)
+
+
+        //POSIBLE ENDPOINT OBSOLETO
+        this.get('/carts/:id',cartsController.editCartsById)
+
+        const isSession = (req,res,next)=>{
+            //DECIDIR SI REDIRECCIONAR A PAGINA PRINCIPAL O AL PERFIL UNA VEZ LOGUEADO
+            //if(req.session.user) return res.redirect("/profile")
+            next()
+        }
+
+        this.get("/login", isSession,(req,res)=>{
+            res.render("login")
+        })
+        this.get("/register",isSession,(req,res)=>{
+            res.render("register")
+        })
+        this.get("/profile",(req,res)=>{
+            if(!req.session.user) return res.redirect("/login")
+            res.render("profile",{user:req.session.user})
+        })
+        
+    }
+}
+  
+
+/*
 router.get("/", productsController.getAllByPages)
+
 
 
 router.get("/add/:id", productsController.addProduct)
@@ -42,3 +86,5 @@ router.get("/profile",(req,res)=>{
 
 
 export default router
+*/
+//export default new viewRoutes()

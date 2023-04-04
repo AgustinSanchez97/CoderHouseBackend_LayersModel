@@ -1,12 +1,7 @@
 import express, { query } from "express";
 import handlebars from "express-handlebars"
 import __dirname from "./utils.js"
-/*
-import productsRouter from "./routes/products_routes.js"
-import viewsRouter from "./routes/views_routes.js"
-import cartsRouter from "./routes/carts_routes.js"
-import session_routes from "./routes/session_routes.js"
-*/
+
 import router from "./routes/index.routes.js";
 
 import mongoose from "mongoose";
@@ -46,7 +41,8 @@ app.use(session({
     saveUninitialized:false
 }))
 
-console.log(config)
+//NO FUNCIONA
+console.log(process.env.PORT)
 
 
 mongoose.set("strictQuery",true)
