@@ -10,23 +10,7 @@ import jwt from "jsonwebtoken"
 const router = Router()
 
 router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) ,async (req,res) =>{
-    /*
-    const{email, password} = req.body
-    
-    try{
-        const user = await userModel.findOne({email})
-        if(user == null) return res.status(404).redirect("/login")
-        if(!comparePassword(user,password)) return res.status(401).redirect("/login")
 
-        user["password"] = undefined
-        req.session.user = user
-
-        res.status(200).redirect("/")
-    }
-    catch(error){
-        res.status(500).json({mesagge:error.mesagge})
-    }
-    */
     if(!req.user) return res.status(404).json({message:"user not found"})
     
     req.session.user = {
@@ -40,7 +24,7 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
     const email = req.user.email
     const password = req.user.password
 
-    const token = jwt.sign({email,password}, "coderSecret",{expiresIn:"10m"})
+    const token = jwt.sign({email,password}, "coderSecret",{expiresIn:"1m"})
     res.cookie("token",token, {
         maxAge: 500000,
         httpOnly: true
@@ -70,12 +54,23 @@ router.get("/githubcallback",passport.authenticate("github",{failureRedirect:"/l
 
 
 router.get("/logout", async (req,res)=>{
+console.log("hola")
+console.log(res.cookie)
+
+res.cookie("token", {
+    //expires: Date.now(),
+    maxAge: 0,
+    httpOnly: true
+})
+
 req.session.destroy()
 res.redirect("/login")
 })
 
 //CURRENT
 router.get("/current", passport.authenticate("jwt",{session: false}), async (req,res)=>{
+    console.log("dos")
+
     res.json({user:req.user})
 })
 

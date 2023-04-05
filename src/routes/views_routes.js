@@ -15,14 +15,14 @@ export default class viewRoutes extends Router {
       });*/
       
         this.get("/",['PUBLIC'], productsController.getAllByPages)
-        this.get("/add/:id", productsController.addProduct)
-        this.get("/edit/:id", productsController.getById)
-        this.get("/delete/:id", productsController.deleteById)
+        this.get("/add/:id",['USER'], productsController.addProduct)
+        this.get("/edit/:id",['ADMIN'], productsController.getById)
+        this.get("/delete/:id",['ADMIN'], productsController.deleteById)
 
 
-        this.get("/api/carts/" ,cartsController.getAllCarts)
-        this.get("/editCart/:id",cartsController.editCartById)
-        this.get("/api/carts/:cid",cartsController.deleteCartById)
+        this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCarts)
+        this.get("/editCart/:id",['ADMIN'],cartsController.editCartById)
+        this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
 
 
         //POSIBLE ENDPOINT OBSOLETO
@@ -34,13 +34,13 @@ export default class viewRoutes extends Router {
             next()
         }
 
-        this.get("/login", isSession,(req,res)=>{
+        this.get("/login", ['PUBLIC'],isSession,(req,res)=>{
             res.render("login")
         })
-        this.get("/register",isSession,(req,res)=>{
+        this.get("/register",['PUBLIC'],isSession,(req,res)=>{
             res.render("register")
         })
-        this.get("/profile",(req,res)=>{
+        this.get("/profile",['PUBLIC'],(req,res)=>{
             if(!req.session.user) return res.redirect("/login")
             res.render("profile",{user:req.session.user})
         })

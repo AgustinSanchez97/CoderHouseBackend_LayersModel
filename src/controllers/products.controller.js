@@ -6,6 +6,7 @@ import productDao from "../daos/classes/products.dao.js";
 class productsController {
     async getAllByPages(req,res)
     {
+        //console.log(req.session)
         try{
          
             const {page,limit,category,sortMethod}= req.query
