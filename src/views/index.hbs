@@ -62,8 +62,8 @@
                 <td>{{this.price}}</td>
                 <td>{{this.stock}}</td>
                 <td>
-                    <a href="/edit/{{this.id}}" class="btn btn-success">Edit</a>
-                    <a href="/delete/{{this.id}}" class="btn btn-danger">Delete</a>
+                    <a href="/edit/{{this.id}}" class="btn btn-success adminProducts" data-id="{{../user.role}}" style="display: none;" >Edit</a>
+                    <a href="/delete/{{this.id}}" class="btn btn-danger adminProducts" data-id="{{../user.role}}" style="display: none;" >Delete</a>
                     <a href="/add/{{this.id}}" class="btn btn-warning">Add</a>
                 </td>
             </tr>
@@ -86,7 +86,7 @@
 
 
 
-    <div>
+    <div  class="adminProducts" data-id="{{user.role}}" style="display: none;">
         <form class="row mx-auto w-75" action="/api/products" method="POST">
             <input class="form-control my-1" type="text" name="title" placeholder="title...">
             <input class="form-control my-1" type="text" name="description" placeholder="description...">
