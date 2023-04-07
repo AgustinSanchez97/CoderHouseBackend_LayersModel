@@ -26,10 +26,15 @@
         <div>
             
             <form class="row p-3" >
-                <input id="productId" type="hidden" value="{{product.id}}">
-                <input id="cartId" type="hidden" value="{{userData.cart}}" >
-                
-                
+                <input id="productId" type="hidden" value="{{product.id}}" data-id="{{carts}}">
+                <h5>Select the cart to add the product</h5>
+                <select required="required" name="cart" id="listOfCarts">
+                    <option value="">Select a cart</option>
+                    {{#each carts}}
+                        <option value="{{this.id}}" data-id="">{{this.id}}</option>
+                    {{/each}} 
+                </select>
+                <hr>
                 <h5>Select the quantity of the product</h5>
                 <input required="required" type="number" id="productQuantity" name="" min="1" max="{{product.stock}}">
                 <hr>

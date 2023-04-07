@@ -6,7 +6,7 @@ class cartsController {
     async getAllCarts(req,res)
     {
         try{
-            let carts = await cartsValidator.getAll()    
+            let carts = await cartsValidator.getAll()
             res.render("carts",{
                 title:"Carts",carts
             })
@@ -15,7 +15,7 @@ class cartsController {
             console.log(error)
         }
     }
-
+    
     async editCartById(req,res)
     {
         try{

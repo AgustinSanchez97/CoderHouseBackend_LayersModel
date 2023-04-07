@@ -18,7 +18,8 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
             last_name: req.user.last_name,
             email: req.user.email,
             age: req.user.age,
-            role: req.user.role
+            role: req.user.role,
+            cart: req.user.cart
     }
 
     const email = req.user.email
@@ -36,7 +37,7 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
 })
 
 router.post("/register",passport.authenticate("register", {failureRedirect:"/"}), async (req,res)=>{
-
+    
     return res.status(201).redirect("/login")
 })
 

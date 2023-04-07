@@ -47,6 +47,43 @@ router.put("/:id", async (req,res) => {
     }
 
 })
+
+
+router.get("/:cid", async (req,res) => {
+    
+    try 
+    {
+        const allProductsInCart = await cartsDao.getById(req.params.id)
+
+        let productsInCart = allProductsInCart.products.find(product => product._productId == req.body._productId)
+
+        let index = allProductsInCart.products.findIndex(product => product._productId == req.body._productId);
+
+        const productToAdd = await productsDao.getById(req.body._productId)      
+        if(productToAdd.stock < req.body.product) return
+        if(productInCart == null)
+        {
+            allProductsInCart.products.push(req.body)
+        }
+        else
+        {
+            
+            allProductsInCart.products[index]=req.body
+        }
+        const cart = await cartsDao.update(req.params.id, allProductsInCart)
+        res.json(cart)
+        
+    } 
+    catch (error) 
+    {
+        res.status(500).json({ error: error.message })
+    }
+
+})
+
+
+
+
 //Actualiza el producto en el carro especifico
 router.put("/:cid/product/:pid" ,async (req,res) => {
 

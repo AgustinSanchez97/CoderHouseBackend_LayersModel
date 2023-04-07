@@ -5,11 +5,9 @@ const categorySelectedEvent = document.querySelector("#allCategory")
 //if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
 
 const adminProductsInterface = document.querySelectorAll(".adminProducts")
-console.log(adminProductsInterface.length) 
+
 
 adminProductsInterface.forEach(element => {
-    console.log(element.getAttribute("data-id")) 
-    
     if(element.getAttribute("data-id") == "admin") element.style.display = "inline-block"
 });
 

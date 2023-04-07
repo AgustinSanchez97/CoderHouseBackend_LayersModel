@@ -9,6 +9,8 @@ export default class userDTO{
         this.age=userData.age
         this.password=userData.password
         this.role=userData.role
+        this.cart=userData.cart
+        
     }
 }
 

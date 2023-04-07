@@ -3,6 +3,8 @@ import cartDao from "../daos/classes/carts.dao.js";
 
 import productDao from "../daos/classes/products.dao.js";
 
+
+
 class productsController {
     async getAllByPages(req,res)
     {
@@ -94,8 +96,9 @@ class productsController {
     }
 
     async addProduct(req,res)
-    {
-        console.log("hola")
+    {        
+        console.log(req.session.user)
+        const userData = req.session.user
         try{
             const carts = await cartDao.getAll()
 
@@ -134,7 +137,7 @@ class productsController {
                 }
             }
 
-            res.render("add", {title:"AddProduct",product,carts})
+            res.render("add", {title:"AddProduct",product,carts,userData})
         }
         catch(error){
             console.log(error)

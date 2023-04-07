@@ -6,6 +6,9 @@ import GitHubStrategy from "passport-github2"
 
 import jwt, { ExtractJwt } from "passport-jwt"
 
+import cartsDao from "../daos/classes/carts.dao.js"
+
+
 
 
 const jwtStrategy = jwt.Strategy
@@ -50,11 +53,19 @@ const initializePassport = () =>{
             }, async(req,username,password,done) =>{
                 const {first_name, last_name,email, age,role} = req.body
 
+                let cartID = await cartsDao.create()
+                cartID = cartID.id
+                
+
+                console.log(cartID)
+
                 if(!first_name|| !last_name|| !email|| !age|| !password) return done("All field are required", null)
 
+                
                 try{
                     const user = await userModel.findOne({email:username})
                     if(user) return done(null, false)
+
 
                     const newUser = await userModel.create({
                         first_name,
@@ -62,7 +73,8 @@ const initializePassport = () =>{
                         email,
                         age,
                         password: hashPassword(password),
-                        role
+                        role,
+                        cart:cartID
                     })
                     return done(null,newUser)
                 }
