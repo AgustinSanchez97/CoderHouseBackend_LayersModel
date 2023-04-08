@@ -17,7 +17,6 @@ productQuantity.addEventListener("change",(event)=>
     
 
 })
-
 sendEvent.addEventListener("click",(event)=>{
     
     event.preventDefault()
