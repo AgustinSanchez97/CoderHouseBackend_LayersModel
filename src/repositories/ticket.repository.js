@@ -1,4 +1,5 @@
 import ticketDTO from "../daos/dtos/ticketDTO.js";
+import ticketDao from "../daos/classes/ticket.dao.js"
 
 class ticketRepository
 {
@@ -9,7 +10,8 @@ class ticketRepository
 
 
     createTicket= async(ticketData)=>{
-        const ticketDtoInstance = ticketDTO(ticketData)
+        const ticketDtoInstance = new ticketDTO(ticketData)
+        console.log(ticketDtoInstance)
         return await this.dao.create(ticketDtoInstance)
     }
 
@@ -22,6 +24,6 @@ class ticketRepository
 
 
 
-export default new ticketRepository()
+export default new ticketRepository(ticketDao)
 
 

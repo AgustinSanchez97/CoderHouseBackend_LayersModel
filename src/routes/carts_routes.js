@@ -1,6 +1,9 @@
 import cartsDao from "../daos/classes/carts.dao.js"
 import productsDao from "../daos/classes/products.dao.js";
 import { json, Router } from 'express'
+
+import ticketRepository from "../repositories/ticket.repository.js"
+
 const router = Router()
 
 
@@ -81,7 +84,41 @@ router.get("/:cid", async (req,res) => {
 
 })
 
+router.get("/:cid/purchase" ,async (req,res) => {
+    
+    if(!req.session.user) res.redirect("/")
 
+    const allProductsInCart = await cartsDao.getById(req.params.cid)
+    //console.log(allProductsInCart.products)
+    /*
+    allProductsInCart.products.forEach(product => {        
+        const productL = productsDao.getById(product._productId)
+        console.log(productL)
+        
+    })*/
+    //CODE
+    const code = Math.random().toString(36).substring(2, 12)
+    
+    //DATE BUY
+    const date = new Date().toString()
+
+    //TOTAL PRICE
+    let totalCost = 0
+    for (let index = 0; index < allProductsInCart.products.length; index++) {
+        const product = await productsDao.getById(allProductsInCart.products[index]._productId);
+        let quantity = allProductsInCart.products[index].product[0]
+        totalCost += product.price * quantity
+    }
+    //PURCHASER
+    let contact
+    if(req.session.user) contact = req.session.user.email
+    const ticketData={code,date,totalCost,contact}
+    ticketRepository.createTicket(ticketData)
+    
+    //DELETE CART PRODUCTS
+    allProductsInCart.products = []
+    await cartsDao.update(req.params.cid, allProductsInCart)
+})
 
 
 //Actualiza el producto en el carro especifico
@@ -98,12 +135,8 @@ router.delete("/:cid/products/:pid" ,async (req,res) => {
     
     try 
     {                
-        const allProductsInCart = await cartsDao.getById(req.params.cid)
-        
+        const allProductsInCart = await cartsDao.getById(req.params.cid)        
         const productToDelete = await productsDao.getById(req.params.pid)
-
-        //console.log(allProductsInCart)
-        //console.log(productToDelete)
 
 
         let productInCart = allProductsInCart.products.find(product => product._productId == req.params.pid)
@@ -114,9 +147,6 @@ router.delete("/:cid/products/:pid" ,async (req,res) => {
         if(productInCart == null) return
         
         allProductsInCart.products.splice(index,1)
-        
-        //console.log(allProductsInCart.products)
-        
         
         const cart = await cartsDao.update(req.params.cid, allProductsInCart)
         res.json(cart)
