@@ -23,7 +23,7 @@ document.querySelector("#login").addEventListener("click", (eventData)=>{
             console.log(data)
             localStorage.setItem("token",data.token)
             //PARA REDIRIGIR A LA PAGINA PRINCIPAL UNA VEZ INICIADA SESION
-            //window.location.href = "/"
+            window.location.href = "/"
         })
         .catch(error => console.log(error))
     })
