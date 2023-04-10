@@ -1,5 +1,8 @@
 import { Router as expressRouter } from "express";
 import jwt from "jsonwebtoken";
+import CustomError from '../services/CustomError.js';
+import ErrorList from '../services/enums.js';
+import { generateUserError, paramError } from '../services/info.js';
 
 export default class Router {
   constructor() {
@@ -42,8 +45,18 @@ export default class Router {
     const authToken =req.cookies["token"]
     //req.headers["authorization"] || req.headers["Authorization"];
 
+    //if (!authToken) return res.status(401).json({ message: "No token provided" });
+
     if (!authToken)
-      return res.status(401).json({ message: "No token provided" });
+    {
+      CustomError.createError({
+        name: 'Cookie faltante para autenticar token',
+        cause: paramError(authToken),
+        message: 'Try to relogin in the main page',
+        code: ErrorList.INVALID_PARAMS
+      })
+    }
+
 /*
     //const token = authToken.split(" ")[1];
     const token = authToken.split(" ")[1];

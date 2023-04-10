@@ -42,7 +42,7 @@ app.use(session({
 }))
 
 //NO FUNCIONA
-console.log(process.env.PORT)
+//console.log(process.env.PORT)
 
 
 mongoose.set("strictQuery",true)

@@ -1,4 +1,5 @@
 import ProductDTO from "../daos/dtos/productDTO.js";
+import productDAO from "../daos/classes/products.dao.js"
 
 class productRepository
 {
@@ -22,6 +23,6 @@ class productRepository
 
 
 
-export default new productRepository()
+export default new productRepository(productDAO)
 
 
