@@ -23,7 +23,7 @@ sendEvent.addEventListener("click",(event)=>{
     //console.log(selectCardId.value == "",productQuantity.value == "")
     if(selectCardId.value == "" || productQuantity.value == "") return
 
-    console.log(productQuantity.value)
+    //console.log(productQuantity.value)
     const cartId = selectCardId.value
 
     const data = {
@@ -43,7 +43,7 @@ sendEvent.addEventListener("click",(event)=>{
     .then(res => res.json())
     .then(res => console.log(res))
     .then(data => {
-        //window.location.href = "/api/carts/"
+        window.location.href = "/"
     })
 })
 

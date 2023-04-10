@@ -14,7 +14,7 @@
                 <td>Entire Cart #{{cart.id}} </td>
                 <td></td>
                 <td>                                  
-                    <button class="btn btn-danger" id="deleteCart" data-id="{{cart.id}}">Delete All Card Products</button>
+                    <button class="btn btn-danger" data-="{{user.role}}" style="display: none" id="deleteCart" data-id="{{cart.id}}">Delete All Card Products</button>
                 </td>
             </tr>
             {{#each productsData}}

@@ -10,8 +10,7 @@ class ticketRepository
 
 
     createTicket= async(ticketData)=>{
-        const ticketDtoInstance = new ticketDTO(ticketData)
-        console.log(ticketDtoInstance)
+        const ticketDtoInstance = new ticketDTO(ticketData)        
         return await this.dao.create(ticketDtoInstance)
     }
 

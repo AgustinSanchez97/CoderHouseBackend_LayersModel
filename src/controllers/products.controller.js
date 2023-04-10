@@ -97,7 +97,7 @@ class productsController {
 
     async addProduct(req,res)
     {        
-        console.log(req.session.user)
+        //console.log(req.session.user)
         const userData = req.session.user
         try{
             const carts = await cartDao.getAll()

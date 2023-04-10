@@ -89,13 +89,7 @@ router.get("/:cid/purchase" ,async (req,res) => {
     if(!req.session.user) res.redirect("/")
 
     const allProductsInCart = await cartsDao.getById(req.params.cid)
-    //console.log(allProductsInCart.products)
-    /*
-    allProductsInCart.products.forEach(product => {        
-        const productL = productsDao.getById(product._productId)
-        console.log(productL)
-        
-    })*/
+    
     //CODE
     const code = Math.random().toString(36).substring(2, 12)
     
@@ -108,16 +102,24 @@ router.get("/:cid/purchase" ,async (req,res) => {
         const product = await productsDao.getById(allProductsInCart.products[index]._productId);
         let quantity = allProductsInCart.products[index].product[0]
         totalCost += product.price * quantity
+        product.stock -= quantity        
+        if (product.stock > 0) await productsDao.update(product.id,product)
+        else await productsDao.delete(product.id)
+        
     }
+
     //PURCHASER
     let contact
     if(req.session.user) contact = req.session.user.email
     const ticketData={code,date,totalCost,contact}
+    
+    //CREACION DE TICKET
     ticketRepository.createTicket(ticketData)
     
     //DELETE CART PRODUCTS
     allProductsInCart.products = []
     await cartsDao.update(req.params.cid, allProductsInCart)
+    res.redirect("/")
 })
 
 

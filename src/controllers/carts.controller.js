@@ -21,7 +21,9 @@ class cartsController {
         try{
             const cart = await cartsValidator.getById(req.params.id)            
             const productsData = cart.products
-            res.render("editCart", {title:"EditCart",cart,productsData} )
+            const user = req.session.user            
+            if(productsData.length == 0) res.redirect("/")
+            else res.render("editCart", {title:"EditCart",cart,productsData,user} )
         }
         catch(error){
             console.log(error)
@@ -44,7 +46,9 @@ class cartsController {
     {
         try{
             const product = await cartDao.getById(req.params.id)
-            res.render("edit", {title:"Edit",product} )
+
+
+            res.render("edit", {title:"Edit",product,user} )
         }
         catch(error){
             console.log(error)

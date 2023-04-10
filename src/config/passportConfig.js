@@ -57,7 +57,7 @@ const initializePassport = () =>{
                 cartID = cartID.id
                 
 
-                console.log(cartID)
+                //console.log(cartID)
 
                 if(!first_name|| !last_name|| !email|| !age|| !password) return done("All field are required", null)
 
@@ -115,7 +115,7 @@ const initializePassport = () =>{
         },
         async (accessToken,refreshToken,profile,done)=>{    
             try{
-                console.log(profile)
+                //console.log(profile)
                 const user = await userModel.findOne({email:profile.emails[0].value})
                 
                 if(user != null) return done(null,user)

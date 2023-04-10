@@ -3,6 +3,8 @@
 const deleteCartEvent = document.querySelector("#deleteCart")
 const cartId = deleteCartEvent.getAttribute("data-id")
 
+if(deleteCartEvent.getAttribute("data-") == "admin") deleteCartEvent.style.display = "inline-block"
+
 deleteCartEvent.addEventListener("click", (eventData)=>{
     eventData.preventDefault();
 
