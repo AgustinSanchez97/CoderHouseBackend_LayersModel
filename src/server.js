@@ -14,7 +14,7 @@ import initializePassport from "./config/passportConfig.js";
 import passport from "passport";
 
 import config from "./config/config.js";
-
+//import { addLogger } from "./utils/logger.js";
 
 const app = express();
 
@@ -25,6 +25,7 @@ app.use(express.static(`${__dirname}/public`))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
+//app.use(addLogger)
 app.use(session({
     store: MongoStore.create({
         mongoUrl:"mongodb+srv://coder:coder123@coderhousehosting.xowlbyk.mongodb.net/ecommerce?retryWrites=true&w=majority",
@@ -42,7 +43,7 @@ app.use(session({
 }))
 
 //NO FUNCIONA
-//console.log(process.env.PORT)
+console.log(config.role)
 
 
 mongoose.set("strictQuery",true)
