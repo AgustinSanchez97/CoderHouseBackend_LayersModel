@@ -1,5 +1,7 @@
 import productsController from "../controllers/products.controller.js";
 import cartsController from "../controllers/carts.controller.js";
+import usersController from "../controllers/user.controller.js";
+
 import Router from "./router.js";
 
 
@@ -14,7 +16,7 @@ export default class viewRoutes extends Router {
       
         this.get("/",['PUBLIC'], productsController.getAllByPages)
         this.get("/add/:id",['USER'], productsController.addProduct)
-        this.get("/edit/:id",['ADMIN'], productsController.getById)
+        this.get("/edit/:id",['ADMIN',"PREMIUM"], productsController.getById)
         this.get("/delete/:id",['ADMIN'], productsController.deleteById)
 
 
@@ -22,7 +24,7 @@ export default class viewRoutes extends Router {
         this.get("/editCart/:id",['ADMIN',"USER"],cartsController.editCartById)
         this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
 
-
+        
         //POSIBLE ENDPOINT OBSOLETO
         this.get('/carts/:id',cartsController.editCartsById)
 
@@ -38,6 +40,11 @@ export default class viewRoutes extends Router {
         this.get("/register",['PUBLIC'],isSession,(req,res)=>{
             res.render("register")
         })
+/*
+        this.get("/recoverPassword",['PUBLIC'],(req,res)=>{
+            res.render("recoverPassword")
+        })*/
+
         this.get("/profile",['USER', 'ADMIN'] ,(req,res)=>{
             if(!req.session.user) return res.redirect("/login")
             res.render("profile",{user:req.session.user})

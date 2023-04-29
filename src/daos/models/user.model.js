@@ -12,7 +12,9 @@ const userSchema = new Schema({
     age:{ type: Number, },
     password:{ type: String, },
     role:{ type: String, required: true, default:"user"},
-    cart:{type: String}
+    cart:{type: String},
+    restoreCode:{type: String},
+    restoreDate:{type:Date}
 })
 
 

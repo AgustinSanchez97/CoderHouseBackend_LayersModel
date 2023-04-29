@@ -47,7 +47,7 @@ class productsController {
     {
         try{
             const product = await productsValidator.getById(req.params.id)
-            res.render("edit", {title:"EditProduct",product} )
+            res.render("edit", {title:"EditProduct",product})
         }
         catch(error){
             console.log(error)

@@ -6,6 +6,8 @@ import cartsRouter from "../routes/carts_routes.js"
 import session_routes from "../routes/session_routes.js"
 import mockingRoutes from "../routes/mocking_routes.js"
 import loggerRoutes from "../routes/logger_routes.js"
+import userRoutes from "../routes/user_routes.js"
+
 
 import errorsHandler from "../middleware/errors/errorsHandler.js";
 import { addLogger } from "../utils/logger.js";
@@ -17,6 +19,8 @@ router.use("/api/products", productsRouter)
 router.use("/", viewRouter.getRouter())
 router.use("/api/carts",cartsRouter)
 router.use("/session",session_routes)
+router.use("/user",userRoutes)
+
 
 router.use("/",mockingRoutes)
 

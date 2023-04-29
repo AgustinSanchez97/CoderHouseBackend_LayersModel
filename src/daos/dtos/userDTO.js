@@ -10,7 +10,8 @@ export default class userDTO{
         this.password=userData.password
         this.role=userData.role
         this.cart=userData.cart
-        
+        this.restoreCode=userData.restoreCode
+        this.restoreDate=userData.restoreDate
     }
 }
 

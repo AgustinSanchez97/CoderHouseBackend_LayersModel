@@ -31,17 +31,26 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
         httpOnly: true
     })
     res.json({token, message: "login success"})
-
+    
     //res.status(200)
     //res.status(200).redirect("/login")
 })
 
-router.post("/register",passport.authenticate("register", {failureRedirect:"/"}), async (req,res)=>{
+router.post("/register",passport.authenticate("register", {failureRedirect:"/register"}), async (req,res)=>{
     
     return res.status(201).redirect("/login")
 })
 
 
+
+//RECUPERACION DE CONTRASEÑA
+router.post("/recoverPassword",passport.authenticate("recoverPassword", {failureRedirect:"/recoverPassword"}) ,async (req,res) =>{
+    console.log(req.user)
+    //if(!req.user) return res.status(404).json({message:"user not found"})
+    res.status(201)
+    return res.json({ message: "login success"})
+
+})
 
 router.get("/github", passport.authenticate("github"))
 
@@ -55,8 +64,7 @@ router.get("/githubcallback",passport.authenticate("github",{failureRedirect:"/l
 
 
 router.get("/logout", async (req,res)=>{
-console.log("hola")
-console.log(res.cookie)
+
 
 res.cookie("token", {
     //expires: Date.now(),
@@ -70,7 +78,7 @@ res.redirect("/login")
 
 //CURRENT
 router.get("/current", passport.authenticate("jwt",{session: false}), async (req,res)=>{
-    console.log("dos")
+    
 
     res.json({user:req.user})
 })

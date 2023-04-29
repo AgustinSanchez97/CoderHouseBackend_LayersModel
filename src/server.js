@@ -42,8 +42,8 @@ app.use(session({
     saveUninitialized:false
 }))
 
-//NO FUNCIONA
-console.log(config.role)
+//VARIABLES DE ENTORNO
+//console.log(config)
 
 
 mongoose.set("strictQuery",true)
@@ -82,7 +82,7 @@ app.use("/", router)
 // app.use("/session",session_routes)
 
 
-app.listen(8080,() => {console.log("Escuchando en el puerto 8080")})
+app.listen(config.port,() => {console.log("Escuchando en el puerto 8080")})
 
 
 

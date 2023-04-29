@@ -7,6 +7,7 @@ import GitHubStrategy from "passport-github2"
 import jwt, { ExtractJwt } from "passport-jwt"
 
 import cartsDao from "../daos/classes/carts.dao.js"
+import sendMail from "../utils/sendMail.js";
 
 
 
@@ -74,8 +75,13 @@ const initializePassport = () =>{
                         age,
                         password: hashPassword(password),
                         role,
-                        cart:cartID
+                        cart:cartID,
+                        restoreCode:Math.random().toString(36).substring(2, 12),
+                        restoreDate:new Date().toString()
                     })
+                    
+                    await sendMail.sendMailSimple(email,"Welcome to the Website","You have register in our page!")
+
                     return done(null,newUser)
                 }
                 catch(error){
@@ -84,7 +90,6 @@ const initializePassport = () =>{
             }
         )
     );
-
     passport.use(
         "login",
         new localStrategy(
@@ -98,14 +103,42 @@ const initializePassport = () =>{
                     if(user == null) return done(null,false)
                     if(!comparePassword(user,password)) return done(null,false)
                     
+                    await sendMail.sendMailSimple(user.email,"Welcome to the Website","Welcome!")
                     return done(null,user)
                 }
                 catch(error){
-                    return done("Error al crear el usuario: " + error)
+                    return done("Error al iniciar sesion: " + error)
+                }
+            }
+        )
+    )
+
+
+
+    passport.use(
+        "recoverPassword",
+        new localStrategy(
+            {
+                usernameField:"email",
+            },
+            async (username,password,done)=>{    
+                console.log("hola")
+                try{
+                    const user = await userModel.findOne({email:username})
+                    if(user == null) return done(null,false)
+                    console.log(user.email)
+                    
+                    await sendMail.sendMailSimple(user.email,"mensaje para recuperar la contraseña","salame!")
+                    return done(null,user)
+                }
+                catch(error){
+                    return done("Error al buscar el mail: " + error)
                 }
             }
         )
     );
+
+ 
 
     passport.use(new GitHubStrategy({
         clientID:"Iv1.7430041e813a3fc3",
