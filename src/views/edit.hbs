@@ -1,6 +1,6 @@
 <div>
         <form class="row p-3" >
-            <input type="text" id="id" name="id" value="{{product.id}}">
+            <input type="text" id="id" name="id" value="{{product.id}}" readonly>
             <input 
             class="form-control m-1" 
             type="text" 
@@ -35,6 +35,14 @@
             name="stock" 
             value="{{product.stock}}"
             id="stock"
+            >
+            <input 
+            class="form-control m-1" 
+            type="text" 
+            name="owner" 
+            value="{{product.owner}}"
+            id="owner"
+            readonly
             >
 
             <input type="submit" value="Send" class="btn btn-primary" id="send"> 

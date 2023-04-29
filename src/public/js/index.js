@@ -1,18 +1,48 @@
-const actualCategory = document.querySelector("#actualCategory")
-const categorySelectedEvent = document.querySelector("#allCategory")
 
+
+const userRole = document.querySelector("#userRole").value
+const userEmail = document.querySelector("#userEmail").value
+
+const specialProducts = document.querySelectorAll(".specialProduct")
+
+
+const purchaseLimitations = document.querySelectorAll(".purchaseLimitation")
+
+
+
+if(userRole == "admin")
+{
+    specialProducts.forEach(element => {
+        element.style.display = "inline-block"
+    });
+}
+
+else if(userRole == "premium")
+{
+    specialProducts.forEach(element => {
+        if(element.getAttribute("data-id") == userEmail) element.style.display = "inline-block"
+    });
+    purchaseLimitations.forEach(element => {
+        if(element.getAttribute("data-id") == userEmail) element.style.display = "none"
+    });
+
+}
+else
+{
+
+}
 //const adminProductsInterface = document.querySelector("#adminProducts")
 //if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
 
-const adminProductsInterface = document.querySelectorAll(".adminProducts")
-
+const adminProductsInterface = document.querySelectorAll(".createProductInterface")
 
 adminProductsInterface.forEach(element => {
-    if(element.getAttribute("data-id") == "admin") element.style.display = "inline-block"
+    if(element.getAttribute("data-id") == "admin" ||element.getAttribute("data-id") == "premium") element.style.display = "inline-block"
 });
 
 //if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
-
+const actualCategory = document.querySelector("#actualCategory")
+const categorySelectedEvent = document.querySelector("#allCategory")
 
 
 categorySelectedEvent.addEventListener("change",(event)=>

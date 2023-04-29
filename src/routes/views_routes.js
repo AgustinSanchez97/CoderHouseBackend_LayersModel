@@ -15,9 +15,9 @@ export default class viewRoutes extends Router {
       });*/
       
         this.get("/",['PUBLIC'], productsController.getAllByPages)
-        this.get("/add/:id",['USER'], productsController.addProduct)
+        this.get("/add/:id",['USER',"PREMIUM"], productsController.addProduct)
         this.get("/edit/:id",['ADMIN',"PREMIUM"], productsController.getById)
-        this.get("/delete/:id",['ADMIN'], productsController.deleteById)
+        this.get("/delete/:id",['ADMIN',"PREMIUM"], productsController.deleteById)
 
 
         this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCarts)
