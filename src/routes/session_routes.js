@@ -19,7 +19,7 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
             email: req.user.email,
             age: req.user.age,
             role: req.user.role,
-            cart: req.user.cart
+            cart: req.user.cart,
     }
 
     const email = req.user.email
