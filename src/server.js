@@ -71,10 +71,17 @@ app.engine("hbs", handlebars.engine(
     }
 ))
 
+    
+
 
 
 //Routers
 app.use("/", router)
+
+import swaggerDocs from "./utils/swagger.js"
+
+
+app.use("/api/docs", swaggerDocs)
 
 // app.use("/api/products", productsRouter)
 // app.use("/",viewsRouter)

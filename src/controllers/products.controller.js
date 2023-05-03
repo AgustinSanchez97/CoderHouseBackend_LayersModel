@@ -61,12 +61,12 @@ class productsController {
             
             const product = await productDao.update(req.params.id,req.body)
             //res.render("edit", {title:"EditProduct",product} )
-            
-            await res.redirect("/")
+            res.status(200).redirect("/")
 
             
         }
         catch(error){
+            res.status(500)
             console.log(error)
         }
     }
@@ -89,9 +89,10 @@ class productsController {
     {        
         try{
             await productDao.create(req.body)
-            res.redirect("/")
+            res.status(200).redirect("/")
         }
         catch(error){
+            res.status(500)
             console.log(error)
         }
     }

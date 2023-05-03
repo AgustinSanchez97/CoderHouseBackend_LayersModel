@@ -1,0 +1,133 @@
+
+
+
+paths:
+  /api/products:
+    post:
+      summary: 'Create a new product'
+      tags:
+        - Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/productBody'
+      responses:
+        "200":
+          description: "Product created"
+              
+        "400":
+          description: "Bad Request server error"
+          
+
+  /api/products/{id}:
+    put:
+      summary: 'Update or modify a created product'
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Product id to update"
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        "200":
+          description: "Product updated"
+              
+        "500":
+          description: "Internal server error"
+
+
+components:
+  schemas:
+    ProductUpdate:
+      properties:
+        id:
+         type: string
+         description: "6452b35e6a5c86627fac8c44"
+        title:
+         type: string
+         description: "Product name"
+        description:
+         type: string
+         description: "Product description"
+        category:
+         type: string
+         description: "Product category"
+        price:
+         type: number
+         description: "Product price"
+        stock:
+         type: number
+         description: "Product stock"
+      example:
+       id: "6452b35e6a5c86627fac8c44"
+       title: "Queso vegano"
+       description: "vegano"
+       category: "Vegano"
+       price: 50
+       stock: 5
+
+
+  requestBodies:
+    productBody:
+      properties:
+        title:
+          type: string
+          description: "Product name"
+        description:
+          type: string
+          description: "Product description"
+        category:
+          type: string
+          description: "Product category"
+        price:
+          type: number
+          description: "Product price"
+        stock:
+          type: number
+          description: "Product stock"
+        owner:
+          type: string
+          description: "Product owner"
+      example:
+        title: "Queso"
+        description: "comida"
+        category: "Lacteo"
+        price: 26
+        stock: 10
+        owner: coder@gmail.com
+
+requestBodies:
+  productBodyUpdate:
+      properties:
+        title:
+          type: string
+          description: "Product name"
+        description:
+          type: string
+          description: "Product description"
+        category:
+          type: string
+          description: "Product category"
+        price:
+          type: number
+          description: "Product price"
+        stock:
+          type: number
+          description: "Product stock"
+      example:
+        title: "Queso vegano"
+        description: "vegano"
+        category: "Vegano"
+        price: 50
+        stock: 5

@@ -122,16 +122,6 @@ router.get("/:cid/purchase" ,async (req,res) => {
     res.redirect("/")
 })
 
-
-//Actualiza el producto en el carro especifico
-router.put("/:cid/product/:pid" ,async (req,res) => {
-
-})
-/*
-router.post("/:cid/product/:pid" ,(req,res) => {
-
-})
-*/
 //borrar producto especifico de carrito
 router.delete("/:cid/products/:pid" ,async (req,res) => {
     
@@ -153,8 +143,6 @@ router.delete("/:cid/products/:pid" ,async (req,res) => {
         const cart = await cartsDao.update(req.params.cid, allProductsInCart)
         res.json(cart)
 
-
-        //res.json(cart)
     } 
     catch (error) 
     {

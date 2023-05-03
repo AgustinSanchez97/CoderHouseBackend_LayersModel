@@ -8,6 +8,8 @@ import mockingRoutes from "../routes/mocking_routes.js"
 import loggerRoutes from "../routes/logger_routes.js"
 import userRoutes from "../routes/user_routes.js"
 
+//import swaggerDocs from "../utils/swagger.js"
+
 
 import errorsHandler from "../middleware/errors/errorsHandler.js";
 import { addLogger } from "../utils/logger.js";
@@ -21,13 +23,16 @@ router.use("/api/carts",cartsRouter)
 router.use("/session",session_routes)
 router.use("/user",userRoutes)
 
+//router.use("/api/docs",swaggerDocs)
+
 
 router.use("/",mockingRoutes)
 
+/*
 router.use(errorsHandler)
 router.use(addLogger)
 router.use("/",loggerRoutes)
-
+*/
 
 
 
