@@ -1,0 +1,147 @@
+
+paths:
+  /api/carts:
+    post:
+      summary: 'Create a new Cart'
+      tags:
+        - Cart        
+      responses:
+        "200":
+          description: "Cart created"
+              
+        "400":
+          description: "Bad Request server error"
+
+    get:
+      summary: 'Get data from all carts'
+      tags:
+        - Cart
+      parameters:
+        - description: "All Carts id to Get"
+
+      responses:
+        "200":
+          description: "All Carts data"
+              
+        "500":
+          description: "Internal server error"
+
+    
+
+  /api/carts/{id}:
+    get:
+      summary: 'Get data from a cart by Id'
+      tags:
+        - Cart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Cart id to Get"
+          schema:
+            type: string
+            example:
+              "64127aab39431c14b5e39f01"
+      responses:
+        "200":
+          description: "Cart data"
+              
+        "500":
+          description: "Internal server error"
+          
+    put:
+      summary: 'Put data to a cart by Id'
+      tags:
+        - Cart
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/cartBody'              
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Need Id to change cart data"
+          schema:
+            type: string
+            example:
+              "6452d740363649176bd184b3"
+      responses:
+        "200":
+          description: "Cart data"
+              
+        "500":
+          description: "Internal server error"
+        
+
+
+
+    delete:
+      summary: 'Delete data from a cart by Id'
+      tags:
+        - Cart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Cart id to Get"
+          schema:
+            type: string
+            example:
+              "64127aaf39431c14b5e39f0f
+              642eef1f16b787a1999dbaea
+              642eefd28beef7f597f7edd8
+              642ef0002838c184b6379674
+              642ef0640c8dbc86433e5fa9
+              642ef1353776cf66369b7e50
+              642ef156c31d334d75e1f991
+              642ef165ff351a072d8e3ac9
+              642ef19be082b1226bb9f0c5
+              642ef1dae4ff592882154b48
+              642ef253b3fa7c1a9fd5b027
+              642ef270b3fa7c1a9fd5b02d
+              642f9fd346d0cfdb3c896715
+              64302f925fbc45cc74ecbc29
+              643352f08a2851777aa356ac
+              643353398a2851777aa356ce
+              64349cc23441535e09f16ca2
+              64417a2e51e0382aee01ca58
+              64417a2f51e0382aee01ca5f
+              644957474445e955021a3a2c
+              64495794bc0fc7c38545705f
+              64495809bc0fc7c385457065
+              64495945ed135c5baaac7b80
+              64495965ed135c5baaac7b86
+              64495bb9f55e325af4fb27e4
+              644c13309c89965165682dad
+              644c13a7eee24aec06b05de4
+              644c17aa3fb6790bda3cf092
+              644c181b1ffe66e1f89c393c"
+      responses:
+        "200":
+          description: "Cart deleted"
+              
+        "500":
+          description: "Internal server error"
+
+components:
+  
+
+
+  requestBodies:
+    cartBody:
+      type: object
+      properties:
+        _productId:
+          type: string
+          description: "Product Id"
+        product:
+          type: array
+          description: "Product quantity"
+        
+      example:
+        _productId: "63d872256b24666f47db634d"
+        product: ["3"]

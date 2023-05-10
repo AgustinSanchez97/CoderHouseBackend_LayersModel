@@ -12,7 +12,7 @@ router.post("/" , async (req,res) => {
     try 
     {
         const cart = await cartsDao.create()
-        res.redirect("/api/carts/")
+        res.status(200).redirect("/api/carts/")
     }catch (error)
     {
         res.status(500).json({ error: error.message });
@@ -40,8 +40,10 @@ router.put("/:id", async (req,res) => {
             
             allProductsInCart.products[index]=req.body
         }
-        const cart = await cartsDao.update(req.params.id, allProductsInCart)
-        res.json(cart)
+        await cartsDao.update(req.params.id, allProductsInCart)
+        const cart = await cartsDao.getById(req.params.id)
+        
+        await res.status(200).json(cart)
         
     } 
     catch (error) 
@@ -52,29 +54,18 @@ router.put("/:id", async (req,res) => {
 })
 
 
-router.get("/:cid", async (req,res) => {
-    
+router.get("/:cid", async (req,res) => {    
     try 
     {
-        const allProductsInCart = await cartsDao.getById(req.params.id)
+        const cart = await cartsDao.getById(req.params.cid)
+        
+        //console.log(typeof cart)
 
-        let productsInCart = allProductsInCart.products.find(product => product._productId == req.body._productId)
+        if(cart == null) res.status(500).json(cart)
 
-        let index = allProductsInCart.products.findIndex(product => product._productId == req.body._productId);
+        else res.status(200).json(cart)
+        
 
-        const productToAdd = await productsDao.getById(req.body._productId)      
-        if(productToAdd.stock < req.body.product) return
-        if(productInCart == null)
-        {
-            allProductsInCart.products.push(req.body)
-        }
-        else
-        {
-            
-            allProductsInCart.products[index]=req.body
-        }
-        const cart = await cartsDao.update(req.params.id, allProductsInCart)
-        res.json(cart)
         
     } 
     catch (error) 
@@ -155,7 +146,7 @@ router.delete("/:id",async (req,res) => {
     try 
     {                
         const cart = await cartsDao.delete(req.params.id)
-        res.json(cart)
+        res.status(200).json(cart)
     } 
     catch (error) 
     {

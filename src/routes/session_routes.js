@@ -25,11 +25,16 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
     const email = req.user.email
     const password = req.user.password
 
-    const token = jwt.sign({email,password}, "coderSecret",{expiresIn:"1m"})
+    //1 HORA
+    const token = jwt.sign({email,password}, "coderSecret",{expiresIn:3600000})
     res.cookie("token",token, {
         maxAge: 500000,
-        httpOnly: true
-    })
+        httpOnly: true,
+        //1 HORA
+        expires: new Date(Date.now() + 3600000)
+    })    
+    
+
     res.json({token, message: "login success"})
     
     //res.status(200)

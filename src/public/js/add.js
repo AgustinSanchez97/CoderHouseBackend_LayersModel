@@ -31,7 +31,8 @@ sendEvent.addEventListener("click",(event)=>{
         product:[               
             quantity= productQuantity.value
         ],
-    }    
+    }
+    console.log(data)
 
     fetch(`/api/carts/${cartId}`,{
         method: "PUT",

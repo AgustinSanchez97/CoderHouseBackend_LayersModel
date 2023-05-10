@@ -17,12 +17,15 @@ export default class viewRoutes extends Router {
         this.get("/",['PUBLIC'], productsController.getAllByPages)
         this.get("/add/:id",['USER',"PREMIUM"], productsController.addProduct)
         this.get("/edit/:id",['ADMIN',"PREMIUM"], productsController.getById)
-        this.get("/delete/:id",['ADMIN',"PREMIUM"], productsController.deleteById)
+        //PUBLIC AGREGADO PARA DOCUMENTACION
+        this.get("/delete/:id",['PUBLIC','ADMIN',"PREMIUM"], productsController.deleteById)
 
-
-        this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCarts)
+        //PUBLIC AGREGADO PARA DOCUMENTACION
+        this.get("/api/carts/" ,['PUBLIC','ADMIN'],cartsController.getAllCarts)
         this.get("/editCart/:id",['ADMIN',"USER"],cartsController.editCartById)
-        this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
+        
+        //Ver uso
+        //this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
 
         
         //POSIBLE ENDPOINT OBSOLETO

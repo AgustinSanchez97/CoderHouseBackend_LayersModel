@@ -45,6 +45,42 @@ paths:
               
         "500":
           description: "Internal server error"
+  /:    
+    get:
+      summary: 'Get the view from all products for store'
+      tags:
+        - Product
+      parameters:
+        - description: "All Products to Get"
+
+      responses:
+        "200":
+          description: "All Products data"
+              
+        "500":
+          description: "Internal server error"
+  /delete/{id}:
+    get:
+      summary: 'Delete a created product'
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Product id to Delete"
+          schema:
+            type: string
+            example:
+              id: 645c00009cce85574a81f801
+              id2: 645bfeaaec1d9bfeca28912e
+              id3: 645bfeccec1d9bfeca28915b
+      responses:
+        "200":
+          description: "Product deleted"
+              
+        "500":
+          description: "Internal server error"
 
 
 components:
