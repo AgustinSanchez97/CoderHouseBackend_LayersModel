@@ -72,7 +72,6 @@ class productsController {
     }
 
 
-
     async deleteById(req,res)
     {
         try{
