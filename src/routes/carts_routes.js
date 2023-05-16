@@ -12,12 +12,26 @@ router.post("/" , async (req,res) => {
     try 
     {
         const cart = await cartsDao.create()
-        res.status(200).redirect("/api/carts/")
+        console.log(cart)
+        res.status(200).send({status:"success",payload:cart})
     }catch (error)
     {
         res.status(500).json({ error: error.message });
     }
 })
+//crear carro para admin con interfaz
+/*
+router.post("/admin" , async (req,res) => {
+    try 
+    {
+        const cart = await cartsDao.create()
+        console.log(cart)
+        res.status(200).redirect("/")
+    }catch (error)
+    {
+        res.status(500).json({ error: error.message });
+    }
+})*/
 //actualizar carro
 router.put("/:id", async (req,res) => {
     
@@ -63,7 +77,7 @@ router.get("/:cid", async (req,res) => {
 
         if(cart == null) res.status(500).json(cart)
 
-        else res.status(200).json(cart)
+        else res.status(200).send({status:"success",payload:cart}).json(cart)
         
 
         

@@ -49,7 +49,8 @@ class productsController {
         try{
             const product = await productsValidator.getById(req.params.id)
             
-            res.status(200).send({status:"success",payload:product}).render("edit", {title:"EditProduct",product})
+            res.status(200).send({status:"success",payload:product})
+            res.render("edit", {title:"EditProduct",product})
         }
         catch(error){
             console.log(error)
@@ -79,7 +80,7 @@ class productsController {
         try{
             const product = await productsValidator.delete(req.params.id)
             res.redirect("/")
-            res.render("delete", {title:"DeleteProduct",product} )
+            //res.render("delete", {title:"DeleteProduct",product} )
         }
         catch(error){
             console.log(error)

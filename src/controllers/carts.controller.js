@@ -22,6 +22,7 @@ class cartsController {
             const cart = await cartsValidator.getById(req.params.id)            
             const productsData = cart.products
             const user = req.session.user            
+            //console.log(cart.products)
             if(productsData.length == 0) res.redirect("/")
             else res.render("editCart", {title:"EditCart",cart,productsData,user} )
         }

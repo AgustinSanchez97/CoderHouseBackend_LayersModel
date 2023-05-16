@@ -60,13 +60,62 @@ describe("test de la rutas rutas Products /api/products/:id", () => {
 
         const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
             .get(`api/products/${body.payload._id}`)
-            .send({title: "testing product PUT"})
+            .send({title: "testing product GET"})
 
         expect(bodyPut.payload.title).to.not.be.equal(undefined)
     })
 })
 
 
+//CARTS
+describe("test de la rutas rutas Carts /api/carts", () => {
+    it("POST /api/carts", async () => {
+        const cartMock = {
+            products:[]
+        }
+
+        const { body, statusCode, ok} = await request
+            .post("api/carts/")
+            .send(cartMock)
+                
+        expect(body).to.not.be.empty
+        expect(statusCode).to.equal(200)
+    })
+    it("PUT /api/carts/:id", async () => {
+        const cartMock = {
+            products:[]
+        }
+        
+
+        const { body, statusCode, ok} = await request
+            .post("api/carts/")
+            .send(cartMock)
+            
+            //console.log(body)
+        const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
+            .put(`api/carts/${body.payload._id}`)
+            .send({_productId: '63da72c7061c510a52ac01a3', product: [ '10' ] })
+            
+        expect(body.payload).to.not.be.equal(bodyPut.payload)
+
+    })
+
+    it("GET /api/carts/:id", async () => {
+        const cartMock = {
+            products:[]
+        }
+
+        const { body, statusCode, ok} = await request
+            .post("api/carts/")
+            .send(cartMock)
+
+        const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
+            .get(`api/carts/${body.payload._id}`)
+            .send({title: "testing cart GET"})
+
+        expect(bodyPut.payload).to.not.be.equal(undefined)
+    })
+})
 
 
 
