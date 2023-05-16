@@ -48,7 +48,8 @@ class productsController {
     {
         try{
             const product = await productsValidator.getById(req.params.id)
-            res.render("edit", {title:"EditProduct",product})
+            
+            res.status(200).send({status:"success",payload:product}).render("edit", {title:"EditProduct",product})
         }
         catch(error){
             console.log(error)
@@ -61,7 +62,8 @@ class productsController {
             
             const product = await productDao.update(req.params.id,req.body)
             //res.render("edit", {title:"EditProduct",product} )
-            res.status(200).redirect("/")
+            res.status(200).send({status:"success",payload:product}).redirect("/")
+            
 
             
         }
@@ -87,8 +89,9 @@ class productsController {
     async createProduct(req,res)
     {        
         try{
-            await productDao.create(req.body)
-            res.status(200).redirect("/")
+            const product = await productDao.create(req.body)
+            //res.send({status:"success",payload:product})
+            res.status(200).send({status:"success",payload:product}).redirect("/")
         }
         catch(error){
             res.status(500)
