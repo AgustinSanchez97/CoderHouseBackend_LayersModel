@@ -4,7 +4,7 @@ import supertest from "supertest";
 const expect = chai.expect;
 const request = supertest("http://localhost:8080/")
 
-
+/*
 describe("test de la rutas rutas Products /api/products/:id", () => {
     it("POST /api/products", async () => {
         const productMock = {
@@ -40,8 +40,6 @@ describe("test de la rutas rutas Products /api/products/:id", () => {
             .send({title: "testing product PUT"})
 
         expect(body.payload.title).to.not.be.equal(bodyPut.payload.title)
-        // console.log(statusCode)
-        // console.log(ok)
     })
 
     it("GET /api/products/:id", async () => {
@@ -91,7 +89,6 @@ describe("test de la rutas rutas Carts /api/carts", () => {
             .post("api/carts/")
             .send(cartMock)
             
-            //console.log(body)
         const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
             .put(`api/carts/${body.payload._id}`)
             .send({_productId: '63da72c7061c510a52ac01a3', product: [ '10' ] })
@@ -115,8 +112,62 @@ describe("test de la rutas rutas Carts /api/carts", () => {
 
         expect(bodyPut.payload).to.not.be.equal(undefined)
     })
+})*/
+
+//SESSION
+describe("test de la rutas rutas Session /session/register", () => {
+    it("POST /session/register", async () => {
+        const userMock = {
+            first_name:"Agustin",
+            last_name:"Sanchez",
+            email:"cosito@gmail.com",
+            age: 25,
+            password: "cosito",
+            role: "user"
+        }
+
+        const { body, statusCode, ok} = await request
+            .post("/session/register")
+            .send(userMock)
+                
+            console.log(body)
+        //expect(body).to.not.be.empty
+        expect(statusCode).to.equal(200)
+    })
+    /*
+    it("PUT /session", async () => {
+        const cartMock = {
+            products:[]
+        }
+        
+
+        const { body, statusCode, ok} = await request
+            .post("/session")
+            .send(cartMock)
+            
+        const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
+            .put(`api/carts/${body.payload._id}`)
+            .send({_productId: '63da72c7061c510a52ac01a3', product: [ '10' ] })
+            
+        expect(body.payload).to.not.be.equal(bodyPut.payload)
+
+    })
+
+    it("GET /api/carts/:id", async () => {
+        const cartMock = {
+            products:[]
+        }
+
+        const { body, statusCode, ok} = await request
+            .post("api/carts/")
+            .send(cartMock)
+
+        const { body:bodyPut, statusCode:statusCodePut, ok:okPut} = await request
+            .get(`api/carts/${body.payload._id}`)
+            .send({title: "testing cart GET"})
+
+        expect(bodyPut.payload).to.not.be.equal(undefined)
+    })*/
 })
-
-
 
 

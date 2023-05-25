@@ -4,6 +4,9 @@ import sendMail from "../utils/sendMail.js";
 
 import { hashPassword,comparePassword } from "../utils.js";
 
+
+import {uploader} from '../utils/multer.js';
+
 //import userValidator from "../validators/products.validator.js";
 
 
@@ -88,9 +91,7 @@ class usersController {
                     res.render("changePassword", {title:"changePassword",userExist,codeIsValid,code})
 
                 }
-
             }
-
         }
         catch(error){
             console.log(error)
@@ -118,6 +119,39 @@ class usersController {
             console.log(error)
         }
     }
+
+
+    async getUserId(req,res)
+    {
+        if(!req.session.user) return res.redirect("/login")
+        const user = await usersDao.getByEmail(req.session.user.email)
+        const userId = user[0].id
+        res.render("profileUploadFiles",{userId:userId})
+    }
+
+
+
+    async uploadDocuments(req,res)
+    {
+        console.log(req.file)
+        
+
+        try{
+            uploader.single('Identification'), (req, res) => {
+                console.log(req.file)
+                
+            }
+        }
+
+        catch(error){
+            console.log(error)
+        }
+    }
 }
+
+
+
+
+
 
 export default new usersController()

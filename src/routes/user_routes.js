@@ -17,5 +17,7 @@ router.get("/changePassword/:id", usersController.changePassword)
 router.put("/comparePassword/", usersController.comparePassword)
 
 
+router.post("/:id/documents/", usersController.uploadDocuments)
+
 
 export default router

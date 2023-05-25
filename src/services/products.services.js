@@ -7,7 +7,8 @@ class productServices{
         const products = productModel.find()
         return products
     }
-     getAllByPages(sortMethod,page,limits,orderMethod)
+
+    getAllByPages(sortMethod,page,limits,orderMethod)
     {
         //console.log(orderMethod)
         let options =

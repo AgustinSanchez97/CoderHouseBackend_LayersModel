@@ -1,0 +1,33 @@
+
+
+<div class="bg-dark">
+
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-12 p-3"> 
+          <form class="text-white rounded-4 my-5 cardStyle" action="user/{{userId}}/documents" method="post">
+            <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
+              Registrarse
+            </p>
+              <div class="mb-3 mx-3">
+                <label for="exampleInputEmail1" class="form-label">Subir Identificacion</label>
+                <input  type="file" class="form-control" name="Identification" placeholder="Identification">                
+              </div>
+
+              {{!-- <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Subir Comprobante de Domicilio</label>
+                <input  type="file" class="form-control" placeholder="Adress">
+              </div>
+
+              <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Subir Comprobante de Estado de Cuenta</label>
+                <input  type="file" class="form-control" placeholder="Account">
+              </div> --}}
+              
+              <div class="pb-3 mx-3 d-flex justify-content-end">
+                
+                <button type="submit" class="btn btn-primary ">Registrarse</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>

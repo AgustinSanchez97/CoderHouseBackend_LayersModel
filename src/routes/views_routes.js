@@ -17,12 +17,15 @@ export default class viewRoutes extends Router {
         this.get("/",['PUBLIC'], productsController.getAllByPages)
         this.get("/add/:id",['USER',"PREMIUM"], productsController.addProduct)
         this.get("/edit/:id",['ADMIN',"PREMIUM"], productsController.getById)
-        //PUBLIC AGREGADO PARA DOCUMENTACION
-        this.get("/delete/:id",['PUBLIC','ADMIN',"PREMIUM"], productsController.deleteById)
 
         //PUBLIC AGREGADO PARA DOCUMENTACION
-        this.get("/api/carts/" ,['PUBLIC','ADMIN'],cartsController.getAllCarts)
+        this.get("/delete/:id",['ADMIN',"PREMIUM"], productsController.deleteById)
+
+        //PUBLIC AGREGADO PARA DOCUMENTACION
+        this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCarts)
         this.get("/editCart/:id",['ADMIN',"USER"],cartsController.editCartById)
+
+        
         
         //Ver uso
         //this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
@@ -48,10 +51,12 @@ export default class viewRoutes extends Router {
             res.render("recoverPassword")
         })*/
 
-        this.get("/profile",['USER', 'ADMIN'] ,(req,res)=>{
+        this.get("/profile",['USER',"PREMIUM", 'ADMIN'] ,(req,res)=>{
             if(!req.session.user) return res.redirect("/login")
             res.render("profile",{user:req.session.user})
         })
+
+        this.get("/profileUploadFiles",['USER'] ,usersController.getUserId)
         
     }
 }

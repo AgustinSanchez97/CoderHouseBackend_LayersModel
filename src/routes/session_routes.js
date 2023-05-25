@@ -43,7 +43,7 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
 
 router.post("/register",passport.authenticate("register", {failureRedirect:"/register"}), async (req,res)=>{
     
-    return res.status(201).redirect("/login")
+    return res.status(201).send(res).redirect("/login")
 })
 
 

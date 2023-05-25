@@ -80,7 +80,7 @@ const initializePassport = () =>{
                         restoreDate:new Date().toString()
                     })
                     
-                    await sendMail.sendMailSimple(email,"Welcome to the Website","You have register in our page!")
+                    //await sendMail.sendMailSimple(email,"Welcome to the Website","You have register in our page!")
 
                     return done(null,newUser)
                 }
@@ -103,7 +103,7 @@ const initializePassport = () =>{
                     if(user == null) return done(null,false)
                     if(!comparePassword(user,password)) return done(null,false)
                     
-                    await sendMail.sendMailSimple(user.email,"Welcome to the Website","Welcome!")
+                    //await sendMail.sendMailSimple(user.email,"Welcome to the Website","Welcome!")
                     return done(null,user)
                 }
                 catch(error){
@@ -128,7 +128,7 @@ const initializePassport = () =>{
                     if(user == null) return done(null,false)
                     console.log(user.email)
                     
-                    await sendMail.sendMailSimple(user.email,"mensaje para recuperar la contraseña","salame!")
+                    //await sendMail.sendMailSimple(user.email,"mensaje para recuperar la contraseña","salame!")
                     return done(null,user)
                 }
                 catch(error){

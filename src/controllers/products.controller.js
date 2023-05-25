@@ -32,8 +32,7 @@ class productsController {
             if(category!=undefined) actualCategory = category
             
             //console.log(req.session)
-            //const role =req.session.user.role
-            
+            //const role =req.session.user.role            
             res.render("index",{
                 title:"Products",
                 products,allCategories,actualCategory,user:req.session.user,actualSort,
