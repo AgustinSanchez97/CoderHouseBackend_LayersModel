@@ -18,14 +18,17 @@ import config from "./config/config.js";
 
 const app = express();
 
-
 app.set("view engine","hbs")
 app.set("views",`${__dirname}/views`)
 app.use(express.static(`${__dirname}/public`))
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+//SUBIR EL MAXIMO DE MEGAS PARA DOCUMENTOS
+app.use(express.urlencoded({extended: true,}))
 app.use(cookieParser())
 //app.use(addLogger)
+
+
+
 app.use(session({
     store: MongoStore.create({
         mongoUrl:"mongodb+srv://coder:coder123@coderhousehosting.xowlbyk.mongodb.net/ecommerce?retryWrites=true&w=majority",

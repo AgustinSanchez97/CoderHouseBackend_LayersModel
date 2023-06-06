@@ -56,7 +56,9 @@ export default class viewRoutes extends Router {
             res.render("profile",{user:req.session.user})
         })
 
-        this.get("/profileUploadFiles",['USER'] ,usersController.getUserId)
+        
+
+        
         
     }
 }

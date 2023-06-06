@@ -14,7 +14,14 @@ const userSchema = new Schema({
     role:{ type: String, required: true, default:"user"},
     cart:{type: String},
     restoreCode:{type: String},
-    restoreDate:{type:Date}
+    restoreDate:{type:Date},
+    documents: [{
+        fileName:{type:String},
+        reference:{type:String}
+    }]
+    
+    
+    
 })
 
 

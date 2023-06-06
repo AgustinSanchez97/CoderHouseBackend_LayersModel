@@ -113,7 +113,7 @@ class usersController {
             }
 
             await usersDao.update(user[0].id,data)
-            res.json({validPassword:true})            
+            res.json({validPassword:true})
         }
         catch(error){
             console.log(error)
@@ -129,17 +129,28 @@ class usersController {
         res.render("profileUploadFiles",{userId:userId})
     }
 
-
-
-    async uploadDocuments(req,res)
+    async referenceToDocumentsUploaded(req,fileName,reference,res)
     {
-        console.log(req.file)
-        
+        try
+        {
+            if(!req.session.user) return res.redirect("/login")
+            let user = await usersDao.getByEmail(req.session.user.email)
+            
 
-        try{
-            uploader.single('Identification'), (req, res) => {
-                console.log(req.file)
-                
+            if(user[0].documents.length >= 3) 
+            {
+                await usersDao.deleteDocuments(user[0].id)
+                user = await usersDao.getByEmail(req.session.user.email)
+
+            }
+
+            if(user[0].documents.length < 3)
+            {                
+                const data={
+                    fileName:fileName,
+                    reference:reference
+                }            
+                await usersDao.createDocuments(user[0].id,data)
             }
         }
 
@@ -147,11 +158,24 @@ class usersController {
             console.log(error)
         }
     }
+
+    async checkDocumentsForPremium(req,res)
+    {
+        try
+        {            
+            if(!req.session.user) return res.redirect("/login")
+            const user = await usersDao.getByEmail(req.session.user.email)            
+            let validPremium = false
+            if(user[0].documents.length == 3) validPremium = true
+            if(user[0].role == "user" && validPremium) await usersDao.update(user[0].id,{role:"premium"})
+            
+            res.render("premiumCheck",{validPremium:validPremium})
+        }
+
+        catch(error){
+            console.log(error)
+        }
+    }
 }
-
-
-
-
-
 
 export default new usersController()

@@ -1,0 +1,25 @@
+
+<div>
+    
+    {{#if validPremium}}
+        <h1>Felicidades</h1>
+        <h3>Ahora eres un usuario premium</h3>
+        <a class="btn btn-success" href="/" >Volver</a>
+
+    {{/if}}
+
+    {{#unless validPremium}}
+        <h1>No se pudo mejorar la cuenta</h1>
+        <h3>Debes subir la documentacion requerida para mejorar a premium</h3>
+        <a class="btn btn-warning" href="/profileUploadFiles" >Subir Documentacion</a>
+    {{/unless}}
+        
+
+
+
+
+    {{!-- <a class="btn btn-success" href="/api/users/premium/{{user.email}}" >Mejorar a Premium</a>
+    <a class="btn btn-success" href="/profileUploadFiles" >Subir documentos</a> --}}
+    {{!-- <a class="btn btn-success" href="/" >Volver</a> --}}
+
+</div>

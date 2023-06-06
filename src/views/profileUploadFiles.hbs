@@ -4,30 +4,38 @@
 
     <div class="row mt-5">
         <div class="col-lg-6 col-md-12 p-3"> 
-          <form class="text-white rounded-4 my-5 cardStyle" action="user/{{userId}}/documents" method="post">
+          <form class="text-white rounded-4 my-5 cardStyle" action="user/{{userId}}/documents"  method="post" enctype='multipart/form-data'>
+            
             <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
-              Registrarse
+              Subir Archivos
             </p>
-              <div class="mb-3 mx-3">
-                <label for="exampleInputEmail1" class="form-label">Subir Identificacion</label>
-                <input  type="file" class="form-control" name="Identification" placeholder="Identification">                
+            <div class="mb-3 mx-3">                
+                <input type="hidden" id="formAction" value="user/{{userId}}/documents">
               </div>
 
-              {{!-- <div class="mb-3 mx-3">
+              <div class="mb-3 mx-3">
+                <label for="exampleInputEmail1" class="form-label">Subir Identificacion</label>
+                <input required type="file" class="form-control" name="document" id="document" placeholder="document">                
+              </div>
+
+              <div class="mb-3 mx-3">
                 <label for="exampleInputPassword1" class="form-label">Subir Comprobante de Domicilio</label>
-                <input  type="file" class="form-control" placeholder="Adress">
+                <input required type="file" class="form-control" name="adress" id="adress" placeholder="Adress">
               </div>
 
               <div class="mb-3 mx-3">
                 <label for="exampleInputPassword1" class="form-label">Subir Comprobante de Estado de Cuenta</label>
-                <input  type="file" class="form-control" placeholder="Account">
-              </div> --}}
+                <input required type="file" class="form-control" name="account" id="account" placeholder="Account">
+              </div>
               
               <div class="pb-3 mx-3 d-flex justify-content-end">
                 
-                <button type="submit" class="btn btn-primary ">Registrarse</button>
+                <button type="submit" id="send" class="btn btn-primary ">Subir</button>
               </div>
             </form>
         </div>
     </div>
 </div>
+
+<script src="/js/profileUploadFiles.js"></script>
+

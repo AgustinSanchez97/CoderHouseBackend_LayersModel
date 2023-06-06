@@ -9,9 +9,12 @@
         <li>Edad {{user.age}} </li>
     </ul>
 
-    <a class="btn btn-success" href="/profileUploadFiles" >Verificar documentos</a>
 
 
-    <a class="btn btn-success" href="/session/logout" >Cerrar Sesion</a>
+    <a class="btn btn-warning" href="/profileUploadFiles" >Subir documentos</a>
+
+    <a class="btn btn-success" href="/user/premium/{{user.email}}" >Mejorar a Premium</a>
+
+    <a class="btn btn-danger" href="/session/logout" >Cerrar Sesion</a>
 
 </div>

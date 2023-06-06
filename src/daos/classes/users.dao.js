@@ -87,8 +87,31 @@ class userDao{
     {
         try
         {
-            console.log(data)
+            //console.log(data)
             return await userModel.findByIdAndUpdate(id,data,{new:true})
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+    }
+
+    async createDocuments(id,data)
+    {
+        try
+        {            
+            return await userModel.findByIdAndUpdate(id,{$push:{documents:data}},{new:true})
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+    }
+    async deleteDocuments(id,data)
+    {
+        try
+        {            
+            return await userModel.findByIdAndUpdate(id,{$unset:{documents:""}})
         }
         catch(error)
         {
