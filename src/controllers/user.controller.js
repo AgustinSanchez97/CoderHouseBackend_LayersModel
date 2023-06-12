@@ -10,7 +10,7 @@ class usersController {
     //RENDERIZADO DE TODOS LOS USUARIOS
     async getAllUsers(req,res)
     {
-        if(!req.session.user) return res.redirect("/login")
+        //if(!req.session.user) return res.redirect("/login")
         try{
             let allUsers = await usersDao.getAll()
             res.render("users",{
@@ -38,7 +38,8 @@ class usersController {
     async deleteUser(req,res)
     {
         try{            
-            await usersDao.delete(req.params.id)            
+            const user = await usersDao.delete(req.params.id)
+            res.json(user)
         }
         catch(error){
             console.log(error)
@@ -46,10 +47,11 @@ class usersController {
     }
     //CAMBIAR ROLE
     async changeRole(req,res)
-    {
+    {        
         try
         {
-            await usersDao.update(req.params.id,req.body)            
+            const user = await usersDao.update(req.params.id,req.body)
+            res.json(user)
         }
         catch(error){
             console.log(error)
@@ -79,7 +81,7 @@ class usersController {
                         restoreCode : Math.random().toString(36).substring(2, 12),
                         restoreDate : new Date()
                     }
-                    const newLink = `http://localhost:8080/user/changePassword/${data.restoreCode}`
+                    const newLink = `http://localhost:8080/api/users/changePassword/${data.restoreCode}`
                     await sendMail.sendMailSimple(user[0].email,"Restore Password",`Enter the link to change the password! ${newLink}`)
                     usersDao.update(user[0].id,data)
                 }
@@ -230,12 +232,12 @@ class usersController {
     {
         try{
             let allUsers = await usersDao.getAll()
+            
             for (let index = 0; index < allUsers.length; index++) 
             {
-                const element = allUsers[index];
-                
+                const element = allUsers[index];                
                 //DATE(segundos*minutos)/24h de un dia)
-                const timePast = ( new Date() - new Date(element.last_connection))/ ((1000 * 60)*60) /24
+                const timePast = ( new Date() - new Date(element.last_connection))/ ((1000 * 60)*60) /24                
                 
                 //delete by users id. Todos los usuarios que no tengan fecha o que pase los 2 dias
                 if(timePast > 2)
@@ -245,6 +247,7 @@ class usersController {
                 } 
                 else if(isNaN(timePast)) await usersDao.delete(element.id)
             }
+            res.json({allUsers})
         }
         catch(error){
             console.log(error)

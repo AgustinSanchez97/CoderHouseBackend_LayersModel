@@ -27,8 +27,7 @@ chatbox.addEventListener("keyup", (event) => {
     }
 })
 
-//setInterval(update,2000)
-update()
+
 
 function sendMessage()
 {
@@ -94,7 +93,8 @@ function renderChat(data)
 }
 
 
-
+update()
+setInterval(update,2000)
     
 
 

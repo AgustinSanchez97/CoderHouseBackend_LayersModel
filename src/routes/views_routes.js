@@ -26,8 +26,8 @@ export default class viewRoutes extends Router {
         this.get("/editCart/:id",['ADMIN',"USER","PREMIUM"],cartsController.editCartByIdView)
         
         
-        
-        this.get("/profileUploadFiles",['ADMIN',"USER","PREMIUM"],usersController.renderToUploadFiles)
+        //PARA SUBIR DOCUMENTOS
+        this.get("/profileUploadFiles",["USER","PREMIUM"],usersController.renderToUploadFiles)
         
 
         //POSIBLE ENDPOINT OBSOLETO
@@ -52,9 +52,9 @@ export default class viewRoutes extends Router {
         
         this.get("/api/users/admin",['ADMIN'], usersController.getAllUsersAdmin)
 
-        this.get("/chat",['USER',"PREMIUM", 'ADMIN',"PUBLIC"], usersController.liveChat)
+        this.get("/chat",['USER',"PREMIUM", 'ADMIN'], usersController.liveChat)
         
-        this.get("/ticket/:id",['USER',"PREMIUM", 'ADMIN',"PUBLIC"], cartsController.renderTicket)
+        this.get("/ticket/:id",['USER',"PREMIUM", 'ADMIN'], cartsController.renderTicket)
         
     }
 }

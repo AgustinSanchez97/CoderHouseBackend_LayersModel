@@ -24,7 +24,7 @@ selectEvent.forEach((user) => {
 
     console.log(userId, roleSelected)
     
-    fetch(`api/users/changeRole/${userId}`,{
+    fetch(`changeRole/${userId}`,{
         method: "put",
         headers:{
             "Content-Type": "application/json"
@@ -33,7 +33,7 @@ selectEvent.forEach((user) => {
         })
         .then(res => res.json())
         .then(data => {
-            //window.location.href = "/user"
+            window.location.href = "/api/users/admin"
         })
     })
 })
@@ -44,7 +44,7 @@ deleteEvent.forEach((user) => {
     eventData.preventDefault();
     const userId = eventData.target.closest(".deleteUser").getAttribute("id")        
     
-    fetch(`api/users/${userId}`,{
+    fetch(`delete/${userId}`,{
         method: "delete",
         headers:{
             "Content-Type": "application/json"
@@ -52,7 +52,7 @@ deleteEvent.forEach((user) => {
         })
         .then(res => res.json())
         .then(data => {
-            window.location.href = "/user"
+            window.location.href = "/api/users/admin"
         })
     })
 })
@@ -60,7 +60,7 @@ deleteEvent.forEach((user) => {
 deleteOldUsers.addEventListener("click",(eventData)=>{
     eventData.preventDefault();
 
-    fetch(`api/users/`,{
+    fetch(`/api/users/oldUsers`,{
         method: "delete",
         headers:{
             "Content-Type": "application/json"
@@ -68,6 +68,6 @@ deleteOldUsers.addEventListener("click",(eventData)=>{
         })
         .then(res => res.json())
         .then(data => {
-            window.location.href = "/user"
+            window.location.href = "/api/users/admin"
     })    
 })

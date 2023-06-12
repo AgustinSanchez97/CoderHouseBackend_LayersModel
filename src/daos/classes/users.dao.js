@@ -1,4 +1,6 @@
 import { userModel } from "../models/user.model.js";
+import cartsDao from "./carts.dao.js";
+
 
 
 class userDao{
@@ -110,7 +112,7 @@ class userDao{
     async deleteDocuments(id,data)
     {
         try
-        {            
+        {
             return await userModel.findByIdAndUpdate(id,{$unset:{documents:""}})
         }
         catch(error)
@@ -123,6 +125,8 @@ class userDao{
     {
         try
         {
+            const user = await userModel.findById(id)            
+            await cartsDao.delete(user.cart)
             return await userModel.findByIdAndDelete(id)
         }
         catch(error)

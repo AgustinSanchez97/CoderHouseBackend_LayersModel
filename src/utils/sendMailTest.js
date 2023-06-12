@@ -6,15 +6,15 @@ import config from '../config/config.js';
 class SendMail {
   constructor() {
     this.transporter = nodemailer.createTransport({
-      service:"gmail",      
-      port: 465,
-      secure:true,
-      auth: {
-        user: config.mail_user,
-        pass: config.mail_pass
-      }
-  });
-}
+        host: config.test_mail_host,
+        port: config.test_mail_port,
+        secure:false,
+        auth: {
+          user: config.test_mail_user,
+          pass: config.test_mail_pass
+        }
+      });
+  }
 
   async sendMailSimple(to, subject, text) {
     let descripcion;
@@ -22,7 +22,7 @@ class SendMail {
 
 
     const info = await this.transporter.sendMail({
-      from: config.mail_from,
+      from: config.test_mail_from,
       to,
       subject,
       text

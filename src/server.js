@@ -86,12 +86,6 @@ import swaggerDocs from "./utils/swagger.js"
 
 app.use("/api/docs", swaggerDocs)
 
-// app.use("/api/products", productsRouter)
-// app.use("/",viewsRouter)
-// app.use("/api/carts",cartsRouter)
-// app.use("/session",session_routes)
-
-
 app.listen(config.port,() => {console.log("Escuchando en el puerto 8080")})
 
 

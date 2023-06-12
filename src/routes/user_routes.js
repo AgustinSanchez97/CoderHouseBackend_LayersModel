@@ -34,16 +34,16 @@ export default class viewRoutes extends Router {
         this.put("/changeRole/:id",['ADMIN'], usersController.changeRole)
 
         //BORRO USUARIO MEDIANTE ID
-        this.delete("/:id",['ADMIN'], usersController.deleteUser)
+        this.delete("/delete/:id",['ADMIN'], usersController.deleteUser)
 
         //BORRO USUARIOS SIN CONEXION EN LAS ULTIMAS 2H
-        this.delete("/",['ADMIN'], usersController.deleteOldUsers)
+        this.delete("/oldUsers",['ADMIN'], usersController.deleteOldUsers)
 
         //ACTUALIZAR CHAT
-        this.put("/chat",['USER',"PREMIUM", 'ADMIN',"PUBLIC"],usersController.updateLiveChat)
+        this.put("/chat",['USER',"PREMIUM", 'ADMIN'],usersController.updateLiveChat)
 
         //CONSEGUIR CHAT DEL DIA
-        this.get("/chat/:chatId",['USER',"PREMIUM", 'ADMIN',"PUBLIC"],usersController.getActualChat)
+        this.get("/chat/:chatId",['USER',"PREMIUM", 'ADMIN'],usersController.getActualChat)
 
     }
 }

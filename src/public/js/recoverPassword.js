@@ -9,6 +9,6 @@ if(document.querySelector("#recover") != null)
         if(emailInput.value == "")return alert("Completa todos los campos necesarios")
         
         const email = document.querySelector("#email").value        
-        window.location.href = `api/users/recoverPassword/${email}`        
+        window.location.href = `/api/users/recoverPassword/${email}`
     })
 }
