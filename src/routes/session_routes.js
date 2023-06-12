@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { userModel } from "../daos/models/user.model.js"
 import { comparePassword, hashPassword } from "../utils.js";
 import passport from "passport";
 import cookieParser from "cookie-parser";
+import usersDao from "../daos/classes/users.dao.js";
 
 import jwt from "jsonwebtoken"
 
@@ -25,6 +25,13 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
     const email = req.user.email
     const password = req.user.password
 
+    //LAST CONNECTION
+    const user = await usersDao.getByEmail(email)
+    const data = {
+        last_connection : new Date()
+    }
+    usersDao.update(user[0].id,data)
+
     //1 HORA
     const token = jwt.sign({email,password}, "coderSecret",{expiresIn:3600000})
     res.cookie("token",token, {
@@ -35,26 +42,20 @@ router.post("/login",passport.authenticate("login", {failureRedirect:"/login"}) 
     })    
     
 
-    res.json({token, message: "login success"})
-    
-    //res.status(200)
-    //res.status(200).redirect("/login")
+    res.json({token, message: "login success"})    
 })
 
 router.post("/register",passport.authenticate("register", {failureRedirect:"/register"}), async (req,res)=>{
     
-    return res.status(201).send(res).redirect("/login")
+    return res.status(201).redirect("/login")
 })
 
 
 
 //RECUPERACION DE CONTRASEÑA
 router.post("/recoverPassword",passport.authenticate("recoverPassword", {failureRedirect:"/recoverPassword"}) ,async (req,res) =>{
-    console.log(req.user)
-    //if(!req.user) return res.status(404).json({message:"user not found"})
     res.status(201)
     return res.json({ message: "login success"})
-
 })
 
 router.get("/github", passport.authenticate("github"))
@@ -65,20 +66,24 @@ router.get("/githubcallback",passport.authenticate("github",{failureRedirect:"/l
     res.redirect("/")
 })
 
+router.get("/logout", async (req,res)=>{    
+    if(!req.session.user) return res.redirect("/login")
 
+    //LAST CONNECTION
+    const user = await usersDao.getByEmail(req.session.user.email)
+    const data = {
+        last_connection : new Date()
+    }
+    usersDao.update(user[0].id,data)
 
+    res.cookie("token", {
+        //expires: Date.now(),
+        maxAge: 0,
+        httpOnly: true
+    })
 
-router.get("/logout", async (req,res)=>{
-
-
-res.cookie("token", {
-    //expires: Date.now(),
-    maxAge: 0,
-    httpOnly: true
-})
-
-req.session.destroy()
-res.redirect("/login")
+    req.session.destroy()
+    res.redirect("/login")
 })
 
 //CURRENT

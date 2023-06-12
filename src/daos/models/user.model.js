@@ -18,7 +18,8 @@ const userSchema = new Schema({
     documents: [{
         fileName:{type:String},
         reference:{type:String}
-    }]
+    }],
+    last_connection:{type: String}
     
     
     

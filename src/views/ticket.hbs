@@ -1,0 +1,39 @@
+
+<div class="bg-dark">
+    <div class="row mt-5">
+        <div class="col-lg-6 col-md-12 p-3"> 
+          <form class="text-white rounded-4 my-5 cardStyle" >
+            
+            <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
+              Ticket de Compra
+            </p>
+            {{#each ticket.leftProducts}}
+                <div class="mb-3 mx-3 bg-danger rounded">                
+                    <label for="exampleInputPassword1" class="form-label">Este producto sigue en el carro ya que no habia suficiente stock: {{this._productId}} </label>
+                </div>
+            
+            {{/each}}
+
+
+            <div class="mb-3 mx-3">                
+                <label for="exampleInputPassword1" class="form-label">Fecha de la compra: {{ticket.purchase_datetime}} </label>
+            </div>
+            <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Codigo de la compra: {{ticket.code}} </label>                
+            </div>
+            <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Comprador: {{ticket.purchaser}} </label>
+            </div>
+            <div class="mb-3 mx-3">
+                <label for="exampleInputPassword1" class="form-label">Total de la compra: ${{ticket.amount}} </label>
+            </div>    
+            <div class="pb-3 mx-3 d-flex justify-content-end">
+                <a class="btn btn-dark mx-3 " href="/"  style="background-color: rgb(74, 141, 35);">Volver a la tienda</a>
+            </div>
+
+          </form>
+        </div>
+    </div>
+</div>
+
+{{!-- <script src="/js/login.js"></script> --}}

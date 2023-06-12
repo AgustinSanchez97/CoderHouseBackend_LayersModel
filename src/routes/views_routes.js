@@ -8,35 +8,34 @@ import Router from "./router.js";
 
 export default class viewRoutes extends Router {
     init() {
-        /*
-      this.get('/', ['PUBLIC'], this.getAllUsers);
-      this.get('/currentUser', ['USER', 'USER_PREMIUM'], (req, res) => {
-        res.sendSuccess(req.user);
-      });*/
+
       
         this.get("/",['PUBLIC'], productsController.getAllByPages)
         this.get("/add/:id",['USER',"PREMIUM"], productsController.addProduct)
+        
         this.get("/edit/:id",['ADMIN',"PREMIUM"], productsController.getById)
-
-        //PUBLIC AGREGADO PARA DOCUMENTACION
+        
         this.get("/delete/:id",['ADMIN',"PREMIUM"], productsController.deleteById)
 
-        //PUBLIC AGREGADO PARA DOCUMENTACION
-        this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCarts)
-        this.get("/editCart/:id",['ADMIN',"USER"],cartsController.editCartById)
+        //Vista de todos los carts solo para el administrador
+        this.get("/api/carts/" ,['ADMIN'],cartsController.getAllCartsView)
+        
+        //Vista del carrito del usuario actual
+        this.get("/editCart/",['ADMIN',"USER","PREMIUM"],cartsController.editCartByIdView)
 
+        this.get("/editCart/:id",['ADMIN',"USER","PREMIUM"],cartsController.editCartByIdView)
         
         
-        //Ver uso
-        //this.get("/api/carts/:cid",['ADMIN'],cartsController.deleteCartById)
+        
+        this.get("/profileUploadFiles",['ADMIN',"USER","PREMIUM"],usersController.renderToUploadFiles)
+        
 
-        
         //POSIBLE ENDPOINT OBSOLETO
-        this.get('/carts/:id',cartsController.editCartsById)
+        //this.get('/carts/:id',cartsController.editCartsById)
 
         const isSession = (req,res,next)=>{
             //DECIDIR SI REDIRECCIONAR A PAGINA PRINCIPAL O AL PERFIL UNA VEZ LOGUEADO
-            //if(req.session.user) return res.redirect("/profile")
+            if(req.session.user) return res.redirect("/")
             next()
         }
 
@@ -46,23 +45,19 @@ export default class viewRoutes extends Router {
         this.get("/register",['PUBLIC'],isSession,(req,res)=>{
             res.render("register")
         })
-/*
-        this.get("/recoverPassword",['PUBLIC'],(req,res)=>{
-            res.render("recoverPassword")
-        })*/
 
-        this.get("/profile",['USER',"PREMIUM", 'ADMIN'] ,(req,res)=>{
-            if(!req.session.user) return res.redirect("/login")
-            res.render("profile",{user:req.session.user})
-        })
+
+        this.get("/profile",['USER',"PREMIUM", 'ADMIN'] ,usersController.renderAllTicketsForUser)
 
         
+        this.get("/api/users/admin",['ADMIN'], usersController.getAllUsersAdmin)
 
+        this.get("/chat",['USER',"PREMIUM", 'ADMIN',"PUBLIC"], usersController.liveChat)
         
+        this.get("/ticket/:id",['USER',"PREMIUM", 'ADMIN',"PUBLIC"], cartsController.renderTicket)
         
     }
 }
   
 
 
-//router.get("/", productsController.getAllByPages)

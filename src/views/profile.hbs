@@ -8,13 +8,17 @@
         <li>Email {{user.email}} </li>
         <li>Edad {{user.age}} </li>
     </ul>
+    {{#each tickets}}
+        <div class="w-75 mb-3 mx-1 bg-warning rounded d-flex justify-content-between">
+            <p >Ticket del dia: {{this.purchase_datetime}} </p>
+            <a href="/ticket/{{this._id}}" class="btn btn-primary">Enlace del Ticket</a>
+        </div>
+    {{/each}}
 
-
+    <a class="btn btn-primary" href="/" >Volver</a>
 
     <a class="btn btn-warning" href="/profileUploadFiles" >Subir documentos</a>
-
-    <a class="btn btn-success" href="/user/premium/{{user.email}}" >Mejorar a Premium</a>
-
+    <a class="btn btn-success" href="/api/users/premium/{{user.email}}" >Mejorar a Premium</a>
     <a class="btn btn-danger" href="/session/logout" >Cerrar Sesion</a>
 
 </div>

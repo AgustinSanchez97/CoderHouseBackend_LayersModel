@@ -16,8 +16,7 @@
                 <td>Cart #{{this.id}} </td>
 
                 <td>
-                    <a href="/editCart/{{this.id}}" class="btn btn-success">Edit</a>
-                    {{!-- <a href="/api/carts/deleteCart/{{this.id}}" class="btn btn-danger">Delete</a> --}}                                        
+                    <a href="/editCart/{{this.id}}" class="btn btn-success">Edit</a>                                                        
                     <button class="deleteCart btn btn-danger" id="{{this.id}}" data-id="{{@index}}">Delete</button>
 
                 </td>
@@ -27,11 +26,6 @@
 
         </table>
     </div>
-    {{!-- <div class="">
-        <a href="/carts/?page={{carts.prevPage}}&&limit={{carts.limit}}">Prev</a>
-        <a href="/carts/?page={{carts.nextPage}}&&limit={{carts.limit}}">Next</a>
-        <h5>{{carts.page}}/ {{carts.totalPages}}</h5>
-    </div> --}}
 
     <hr>
     <div>

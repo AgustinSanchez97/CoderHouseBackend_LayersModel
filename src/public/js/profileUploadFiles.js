@@ -1,7 +1,5 @@
 
 
-//console.log(document.querySelector("#send"))
-
 function queryChecker(query,id)
 {
     if(formData.getAll("files").length >= 3) formData.delete("files")
@@ -22,7 +20,7 @@ function queryChecker(query,id)
     }
 
 }
-//let missingData = []
+
 const formData = new FormData();
 
 document.querySelector("#send").addEventListener("click", (eventData)=>{
@@ -38,7 +36,6 @@ document.querySelector("#send").addEventListener("click", (eventData)=>{
 
     if(formData.getAll("files").length == 0) return alert("Completa todos los campos necesarios")
     
-    //console.log(formData.getAll("files"))
     else
     {
         formData
@@ -56,7 +53,7 @@ document.querySelector("#send").addEventListener("click", (eventData)=>{
                 if(data.finishUpload)
                 {
                     //PONER UNA VEZ TERMINADO TODO
-                    //window.location.href = "/profile"
+                    window.location.href = "/profile"
                 }
             })
             .catch(error => console.log(error))

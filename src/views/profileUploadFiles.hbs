@@ -4,13 +4,13 @@
 
     <div class="row mt-5">
         <div class="col-lg-6 col-md-12 p-3"> 
-          <form class="text-white rounded-4 my-5 cardStyle" action="user/{{userId}}/documents"  method="post" enctype='multipart/form-data'>
+          <form class="text-white rounded-4 my-5 cardStyle" action="api/users/{{userId}}/documents"  method="post" enctype='multipart/form-data'>
             
             <p class="text-white text-center py-3 bg-danger cardImgStyle fw-bold fs-5">
               Subir Archivos
             </p>
             <div class="mb-3 mx-3">                
-                <input type="hidden" id="formAction" value="user/{{userId}}/documents">
+                <input type="hidden" id="formAction" value="api/users/{{userId}}/documents">
               </div>
 
               <div class="mb-3 mx-3">

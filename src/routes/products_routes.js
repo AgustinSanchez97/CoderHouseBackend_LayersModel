@@ -1,14 +1,16 @@
-import { Router } from 'express'
 import productsController from "../controllers/products.controller.js";
 
-const router = Router()
+
+import Router from "./router.js";
 
 
-router.get("/:id", productsController.getById)
-
-router.post("/", productsController.createProduct)
-router.put('/:id', productsController.update)
-
-
-
-export default router
+export default class viewRoutes extends Router {
+    init() {
+        //BUSCAR PRODUCTO POR ID
+        this.get("/:id", ['ADMIN',"PREMIUM"],productsController.getById)
+        //CREAR PRODUCTO
+        this.post("/", ['ADMIN',"PREMIUM"],productsController.createProduct)
+        //ACTUALIZAR PRODUCTO
+        this.put('/:id', ['ADMIN',"PREMIUM"],productsController.update)
+    }
+}

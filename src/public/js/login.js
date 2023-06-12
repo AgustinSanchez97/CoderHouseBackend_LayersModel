@@ -1,7 +1,4 @@
 
-
-
-
 document.querySelector("#login").addEventListener("click", (eventData)=>{
     eventData.preventDefault();
     

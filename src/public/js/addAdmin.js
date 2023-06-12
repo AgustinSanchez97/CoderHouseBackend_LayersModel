@@ -15,19 +15,13 @@ selectCardId.addEventListener("change",(event)=>
 
 productQuantity.addEventListener("change",(event)=>
 {
-    //event.preventDefault()
     if (productQuantity.value < Number(productQuantity.min)) productQuantity.value = Number(productQuantity.min)
-
     if (productQuantity.value > Number(productQuantity.max)) productQuantity.value = Number(productQuantity.max)
-
-    
-
 })
 
 sendEvent.addEventListener("click",(event)=>{
     
     event.preventDefault()
-    //console.log(selectCardId.value == "",productQuantity.value == "")
     if(selectCardId.value == "" || productQuantity.value == "") return
 
     console.log(productQuantity.value)
@@ -39,12 +33,7 @@ sendEvent.addEventListener("click",(event)=>{
             quantity= productQuantity.value
         ],
     }    
-    /*
-    product:[                
-                    _productId= productId,
-                    quantity= productQuantity.value
-            ],
-    */
+
 
     fetch(`/api/carts/${cartId}`,{
         method: "PUT",

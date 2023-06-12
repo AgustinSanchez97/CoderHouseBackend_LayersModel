@@ -25,6 +25,17 @@ class ticketDao{
             
         }
     }
+    async getEmail(email)
+    {
+        try{
+            return await ticketModel.find({purchaser:email})
+
+        }
+        catch(error){
+            console.log(error)
+            
+        }
+    }
 
     async create(data)
     {

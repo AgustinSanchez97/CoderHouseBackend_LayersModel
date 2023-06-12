@@ -18,7 +18,7 @@
 
     </div>
     <hr>
-    <div class="p2">
+    <div class="p2 table-responsive">
 
         <table class="table">
             <thead class="table-dark">
@@ -65,9 +65,7 @@
                 <td>{{this.price}}</td>
                 <td>{{this.stock}}</td>
                 <td style="display: none;">{{this.owner}}</td>
-                <td>
-                    {{!-- <a href="/edit/{{this.id}}" class="btn btn-success adminProducts" data-id="{{../user.role}}" style="display: none;" >Edit</a>
-                    <a href="/delete/{{this.id}}" class="btn btn-danger adminProducts" data-id="{{../user.role}}" style="display: none;" >Delete</a> --}}
+                <td>                    
                     <a href="/edit/{{this.id}}" class="btn btn-success specialProduct" data-id="{{this.owner}}" style="display: none;" >Edit</a>
                     <a href="/delete/{{this.id}}" class="btn btn-danger specialProduct" data-id="{{this.owner}}" style="display: none;" >Delete</a>
                     <a href="/add/{{this.id}}" class="btn btn-warning purchaseLimitation" data-id="{{this.owner}}">Add</a>
@@ -78,10 +76,7 @@
 
         </table>
     </div>
-    <div class="">
-        {{!-- <button class="btn btn-primary" id="prevPage" data-id="/?page={{products.prevPage}}&&limit={{products.limit}}">Previous</button>
-        <button class="btn btn-primary" id="nextPage" data-id="/?page={{products.nextPage}}&&limit={{products.limit}}">Next</button> --}}
-
+    <div>
         <a id="prevPage"class="btn btn-primary" href="/?page={{products.prevPage}}&&limit={{products.limit}}&&category={{actualCategory}}&&sortMethod={{actualSort}}">Prev</a>
         <a id="nextPage"class="btn btn-primary" href="/?page={{products.nextPage}}&&limit={{products.limit}}&&category={{actualCategory}}&&sortMethod={{actualSort}}">Next</a>
 

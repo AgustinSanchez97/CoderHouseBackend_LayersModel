@@ -1,16 +1,13 @@
 import { productModel } from "../models/product.model.js";
 
-
 class productDao{
     async getAll()
     {
-        try
-        {
+        try{
             const products = await productModel.find()
             return products
         }
-        catch(error)
-        {
+        catch(error){
             console.log(error)
         }
     }

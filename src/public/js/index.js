@@ -1,10 +1,7 @@
-
-
 const userRole = document.querySelector("#userRole").value
 const userEmail = document.querySelector("#userEmail").value
 
 const specialProducts = document.querySelectorAll(".specialProduct")
-
 
 const purchaseLimitations = document.querySelectorAll(".purchaseLimitation")
 
@@ -27,10 +24,7 @@ else if(userRole == "premium")
     });
 
 }
-else
-{
 
-}
 //const adminProductsInterface = document.querySelector("#adminProducts")
 //if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
 

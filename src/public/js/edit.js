@@ -1,11 +1,6 @@
 
 const sendEvent = document.querySelector("#send")
 
-
-
-
-
-
 sendEvent.addEventListener("click",(event)=>{
     event.preventDefault()
     const id = document.querySelector("#id").value

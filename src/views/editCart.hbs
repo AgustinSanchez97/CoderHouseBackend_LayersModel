@@ -4,7 +4,8 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>      
-                    <th>Quantity</th>        
+                    <th>Quantity</th>
+                    <th>Price</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
             <tr>
                 <td>Cart #{{this._productId}} </td>
                 <td>Products in cart {{this.product}}</td>
+                <td>Product Price ${{this.price}}</td>
 
                 <td>
                     <a href="/add/{{this._productId}}" class="btn btn-success">Edit</a>
@@ -33,6 +35,11 @@
             </tbody>
 
         </table>
-            <a href="/api/carts/{{cart.id}}/purchase" class="btn btn-primary ">Finish purchase</a>
+            <div class="pb-3 mx-3 d-flex justify-content-between w-75 align-center">        
+                <a class="btn btn-warning" href="/" >Volver</a>
+                <a href="/api/carts/{{cart.id}}/purchase" class="btn btn-primary ">Finish purchase</a>
+            </div>
+        </div>
+
     </div>
 <script src="/js/editCart.js"></script>

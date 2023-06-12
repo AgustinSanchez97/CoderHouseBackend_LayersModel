@@ -1,10 +1,5 @@
 
-
-
-
 const passwordCheckEvent = document.querySelector("#passwordCheck")
-
-
 
 
 passwordCheckEvent.addEventListener("click",(event)=>{
@@ -16,7 +11,7 @@ passwordCheckEvent.addEventListener("click",(event)=>{
         code:code
     }
 
-    fetch(`/user/comparePassword/`,{
+    fetch(`/api/users/comparePassword/`,{
         method: "PUT",
         headers:{
             "Content-Type": "application/json"

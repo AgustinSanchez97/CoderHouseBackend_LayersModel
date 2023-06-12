@@ -1,4 +1,4 @@
-<div>
+<div class="table-responsive">
 
     <table class="table">
             <thead class="table-dark">
@@ -25,18 +25,23 @@
         </table>
         <div>
             
-            <form class="row p-3" >
+            <form class="row py-3 w-75" >
                 <input id="productId" type="hidden" value="{{product.id}}">
                 <input id="cartId" type="hidden" value="{{userData.cart}}" >
                 
                 
-                <h5>Select the quantity of the product</h5>
-                <input required="required" type="number" id="productQuantity" name="" min="1" max="{{product.stock}}">
+                <h5 class="mx-5">Select the quantity of the product</h5>
+                <input class="mx-5" required="required" type="number" id="productQuantity" name="" min="1" max="{{product.stock}}">
                 <hr>
                 
-                <button required="required" value="Send" class="btn btn-primary" id="send">Send</button>
                 {{!-- <input required value="Send" class="btn btn-primary" id="send"> --}}
-                
+                <div class="d-flex justify-content-center">            
+                    <div class="pb-3 mx-3 d-flex justify-content-between w-75 align-center">        
+                        <a class="btn btn-warning" href="/" >Volver</a>                    
+                        <button  required="required" value="Send" class="btn btn-primary mx-auto w-25" id="send">Agregar</button>
+                    </div>
+                </div>
+
             </form>
             {{!-- <input type="submit" value="Add" class="btn btn-primary" id="add"> --}}
         </div>

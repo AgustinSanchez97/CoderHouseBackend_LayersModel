@@ -1,14 +1,14 @@
-import { cartModel } from "../models/cart.model.js";
+import { chatModel } from "../models/chat.model.js";
 
 
 
-class cartDao{
+class chatDao{
     async getAll()
     {        
         try
         {
-            let carts = await cartModel.find()        
-            return carts
+            let chats = await chatModel.find()        
+            return chats
             
         }
         catch(error)
@@ -16,13 +16,23 @@ class cartDao{
             console.log(error)
         }
     }
-
+    async getByDate(date)
+    {
+        try
+        {
+            return await chatModel.find({chatDate:date})
+            
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+    }
     async getById(id)
     {
         try
         {
-            return await cartModel.findById(id)
-            
+            return await chatModel.findById(id)            
         }
         catch(error)
         {
@@ -34,7 +44,7 @@ class cartDao{
     {
         try
         {
-            return await cartModel.create(data)
+            return await chatModel.create(data)
             
         }
         catch(error)
@@ -47,7 +57,7 @@ class cartDao{
     {
         try
         {
-            return await cartModel.findByIdAndUpdate(id,data)
+            return await chatModel.findByIdAndUpdate(id,data)
             
         }
         catch(error)
@@ -60,7 +70,7 @@ class cartDao{
     {
         try
         {
-            return await cartModel.findByIdAndDelete(id)
+            return await chatModel.findByIdAndDelete(id)
             
         }
         catch(error)
@@ -72,4 +82,4 @@ class cartDao{
 }
 
 
-export default new cartDao()
+export default new chatDao()

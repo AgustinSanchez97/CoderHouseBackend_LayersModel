@@ -1,0 +1,51 @@
+<div>
+    <h1>Productos Agregados</h1>
+    <input type="hidden" id="userRole" value="{{user.role}}">
+    <input type="hidden" id="userEmail" value="{{user.email}}">
+
+    <div class="p2">
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mail</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each users}}
+            <tr class="userData" id="{{this.email}}">
+                <td>User #{{this.id}} </td>
+                <td>{{this.last_name}} {{this.first_name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.role}}</td>
+
+                <td>
+                    <div class="d-inline-flex w-auto">
+
+                        <select class="form-select w-100 mx-1" id="selectInput{{@index}}"  name="role" >
+                            <option value="user" selected>User</option>
+                            <option value="admin">Admin</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                        <button class="selectRole btn btn-success mx-1" id="{{this.id}}" data-id="{{@index}}">Change</button>
+                        <button class="deleteUser btn btn-danger mx-1" id="{{this.id}}" data-id="{{@index}}">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+    <hr>
+    <div class="row p-3">
+        <button class="btn btn-danger" id="deleteOldUsers">Delete Old Users</button>
+    </div>
+</div>
+
+<script src="/js/users.js"></script>
+

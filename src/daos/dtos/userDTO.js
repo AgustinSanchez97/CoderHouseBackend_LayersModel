@@ -12,6 +12,8 @@ export default class userDTO{
         this.cart=userData.cart
         this.restoreCode=userData.restoreCode
         this.restoreDate=userData.restoreDate
+        this.documents=userData.documents
+        this.last_connection=userData.last_connection
     }
 }
 

@@ -7,6 +7,7 @@ export default class productDTO{
         this.description=productData.description,
         this.category=productData.category,
         this.price=productData.price,
-        this.stock=productData.stock
+        this.stock=productData.stock,
+        this.owner=productData.owner
     }
 }

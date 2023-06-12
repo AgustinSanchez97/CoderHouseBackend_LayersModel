@@ -1,0 +1,38 @@
+<div>
+    <h1>Productos Agregados</h1>
+    <input type="hidden" id="userRole" value="{{user.role}}">
+
+    <div class="p2">
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mail</th>
+                    <th>Role</th>                    
+                </tr>
+            </thead>
+            <tbody>
+            {{#each users}}
+            <tr>
+                <td>User #{{this.id}} </td>
+                <td>{{this.last_name}} {{this.first_name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.role}}</td>
+
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+    </div>
+
+    <hr>
+    <div>
+
+    </div>
+</div>
+
+<script src="/js/users.js"></script>
+

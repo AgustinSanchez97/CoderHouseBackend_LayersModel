@@ -9,6 +9,7 @@ import jwt, { ExtractJwt } from "passport-jwt"
 import cartsDao from "../daos/classes/carts.dao.js"
 import sendMail from "../utils/sendMail.js";
 
+import userRepository from "../repositories/user.repository.js"
 
 
 
@@ -58,8 +59,6 @@ const initializePassport = () =>{
                 cartID = cartID.id
                 
 
-                //console.log(cartID)
-
                 if(!first_name|| !last_name|| !email|| !age|| !password) return done("All field are required", null)
 
                 
@@ -67,8 +66,7 @@ const initializePassport = () =>{
                     const user = await userModel.findOne({email:username})
                     if(user) return done(null, false)
 
-
-                    const newUser = await userModel.create({
+                    const newUser = await userRepository.createUser({
                         first_name,
                         last_name,
                         email,
@@ -77,10 +75,12 @@ const initializePassport = () =>{
                         role,
                         cart:cartID,
                         restoreCode:Math.random().toString(36).substring(2, 12),
-                        restoreDate:new Date().toString()
+                        restoreDate:new Date().toString(),
+                        documents:[],
+                        last_connection:new Date().toString()
                     })
                     
-                    //await sendMail.sendMailSimple(email,"Welcome to the Website","You have register in our page!")
+                    await sendMail.sendMailSimple(email,"Welcome to the Website","You have register in our page!")
 
                     return done(null,newUser)
                 }
@@ -125,10 +125,7 @@ const initializePassport = () =>{
                 console.log("hola")
                 try{
                     const user = await userModel.findOne({email:username})
-                    if(user == null) return done(null,false)
-                    console.log(user.email)
-                    
-                    //await sendMail.sendMailSimple(user.email,"mensaje para recuperar la contraseña","salame!")
+                    if(user == null) return done(null,false)                                        
                     return done(null,user)
                 }
                 catch(error){

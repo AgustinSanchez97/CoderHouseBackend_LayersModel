@@ -1,0 +1,32 @@
+<div class="bg-dark bg-gradient mh-100">
+    <div class="d-flex justify-content-between mx-4 ">
+        <h1 class="text-info">Bienvenide {{user.first_name}} {{user.last_name}} </h1>
+        <input type="hidden" id="chatId" value="{{chatId}}">
+        <input type="hidden" id="userName" value="{{name}}"> 
+        <a class="btn btn-primary mt-2 mb-1" href="/">Volver al inicio</a>       
+    </div>
+    <div class="d-flex justify-content-between mx-4 ">
+        <h3 class="text-info">Chat en Vivo</h3>
+    </div>
+    <hr>
+    <div class="p2">
+
+
+            <div id="textBox">
+                
+            </div>
+            <div class="d-flex">
+                <input class="form-control my-1" id="chatInput" type="text" name="chat" placeholder="Mensaje...">
+                <button class="btn btn-primary my-1 mb-1" id="sendButton">Send</button>
+            </div>
+
+
+    </div>
+    <hr>
+
+
+</div>
+
+<script src="/js/chat.js"></script>
+
+

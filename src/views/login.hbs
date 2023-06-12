@@ -15,11 +15,16 @@
                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                 <div id="emailHelp" class="form-text text-danger">Nunca compartiremos esta información</div>
                 <input type="text" class="form-control" id="password" name="password" placeholder="Password">
-                <a id="" href="/user/recoverPassword" class="form-text text-warning">Olvide mi Contraseña</a>
+                <a id="" href="/api/users/recoverPassword" class="form-text text-warning">Olvide mi Contraseña</a>
                 
               </div>
 
+
               <div class="pb-3 mx-3 d-flex justify-content-end">
+              <div class="pb-3 mx-3 d-flex justify-content-start">
+                <a class="btn btn-warning mx-3 " href="/">Volver</a>
+
+              </div>
                 <a class="btn btn-dark mx-3 " href="/session/current" id="currentCookie" style="background-color: rgb(74, 141, 35);">Current</a>
                 <a class="btn btn-dark mx-3 " href="/session/github" style="background-color: rgb(15, 15, 15);">Entrar con GitHub </a>
                 <a class="btn btn-success mx-3 " href="/register">Registrarse</a>

@@ -25,8 +25,26 @@ export default class Router {
     );
   }
 
+  put(path, policies, ...callbacks) {
+    this.router.put(
+      path,
+      this.handlePolicies(policies),
+      this.generateCustomResponse,
+      this.applyCallbacks(callbacks)
+    );
+  }
+
   post(path, policies, ...callbacks) {
     this.router.post(
+      path,
+      this.handlePolicies(policies),
+      this.generateCustomResponse,
+      this.applyCallbacks(callbacks)
+    );
+  }
+
+  delete(path, policies, ...callbacks) {
+    this.router.delete(
       path,
       this.handlePolicies(policies),
       this.generateCustomResponse,
@@ -46,7 +64,9 @@ export default class Router {
     //req.headers["authorization"] || req.headers["Authorization"];
 
     //if (!authToken) return res.status(401).json({ message: "No token provided" });
-
+    
+/*
+//Prueba de Error custom
     if (!authToken)
     {
       CustomError.createError({
@@ -56,6 +76,7 @@ export default class Router {
         code: ErrorList.INVALID_PARAMS
       })
     }
+*/
 
 /*
     //const token = authToken.split(" ")[1];

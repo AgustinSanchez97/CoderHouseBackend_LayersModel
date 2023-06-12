@@ -1,5 +1,5 @@
 import ProductDTO from "../daos/dtos/productDTO.js";
-import productDAO from "../daos/classes/products.dao.js"
+import productDao from "../daos/classes/products.dao.js"
 
 class productRepository
 {
@@ -9,20 +9,20 @@ class productRepository
     }
 
 
-    createTicket= async(productData)=>{
-        const ticketDtoInstance = ProductDTO(productData)
-        return await this.dao.create(ticketDtoInstance)
+    createProduct= async(productData)=>{
+        const productDtoInstance = new ProductDTO(productData)
+        return await this.dao.create(productDtoInstance)
     }
 
-    getTickets= async()=>{
-        const tickets =this.dao.getAll()
-        return await tickets
+    getProducts= async()=>{
+        const products =this.dao.getAll()
+        return await products
     }
 
 }
 
 
 
-export default new productRepository(productDAO)
+export default new productRepository(productDao)
 
 

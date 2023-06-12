@@ -1,22 +1,22 @@
-import productsValidator from "../validators/products.validator.js";
 import cartDao from "../daos/classes/carts.dao.js";
-
 import productDao from "../daos/classes/products.dao.js";
+import productRepository from "../repositories/product.repository.js"
+import sendMail from "../utils/sendMail.js";
 
 
 
 class productsController {
+    //RENDERIZADO DE PRODUCTOS POR PAGINAS Y METHODOS PARA SORTEAR
     async getAllByPages(req,res)
-    {
-        //console.log(req.session)
+    {        
         try{
          
             const {page,limit,category,sortMethod}= req.query
 
-            let products = await productsValidator.getAllByPages(category,page||1,limit||4,sortMethod)
+            let products = await productDao.getAllByPages(category,page||1,limit||4,sortMethod)
             
 
-            let allProducts = await productsValidator.getAll()
+            let allProducts = await productDao.getAll()
             let allCategories = []
             allCategories.push("todos")
 
@@ -30,9 +30,7 @@ class productsController {
 
             let actualCategory = "todos"
             if(category!=undefined) actualCategory = category
-            
-            //console.log(req.session)
-            //const role =req.session.user.role            
+                  
             res.render("index",{
                 title:"Products",
                 products,allCategories,actualCategory,user:req.session.user,actualSort,
@@ -43,62 +41,24 @@ class productsController {
         }
     }
 
+    //RENDERIZA EL PRODUCTO POR ID
     async getById(req,res)
     {
         try{
-            const product = await productsValidator.getById(req.params.id)
-            
-            res.status(200).send({status:"success",payload:product})
-            res.render("edit", {title:"EditProduct",product})
+            const product = await productDao.getById(req.params.id)
+            if(product != undefined)
+            {
+                //res.status(200).send({status:"success",payload:product})
+                res.render("edit", {title:"EditProduct",product})
+            }
+            else res.status(500).redirect("/")
         }
         catch(error){
             console.log(error)
         }
     }
 
-    async update(req,res)
-    {
-        try{            
-            
-            const product = await productDao.update(req.params.id,req.body)
-            //res.render("edit", {title:"EditProduct",product} )
-            res.status(200).send({status:"success",payload:product}).redirect("/")
-            
-
-            
-        }
-        catch(error){
-            res.status(500)
-            console.log(error)
-        }
-    }
-
-
-    async deleteById(req,res)
-    {
-        try{
-            const product = await productsValidator.delete(req.params.id)
-            res.redirect("/")
-            //res.render("delete", {title:"DeleteProduct",product} )
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
-
-    async createProduct(req,res)
-    {        
-        try{
-            const product = await productDao.create(req.body)
-            //res.send({status:"success",payload:product})
-            res.status(200).send({status:"success",payload:product}).redirect("/")
-        }
-        catch(error){
-            res.status(500)
-            console.log(error)
-        }
-    }
-
+    //AGREGA PRODDUCTO AL CARRO DESDE EL RENDERIZADO
     async addProduct(req,res)
     {        
         //console.log(req.session.user)
@@ -147,7 +107,48 @@ class productsController {
             console.log(error)
         }
     }
-    
+
+
+    //ACTUALIZAR PRODUCTO
+    async update(req,res)
+    {
+        try{
+            const product = await productDao.update(req.params.id,req.body)            
+            res.status(200).send({status:"success",payload:product}).redirect("/")            
+        }
+        catch(error){
+            res.status(500)
+            console.log(error)
+        }
+    }
+
+    //BORRAR PRODUCTO POR ID
+    async deleteById(req,res)
+    {
+        try{
+            const product = await productDao.delete(req.params.id)
+            await sendMail.sendMailSimple(product.owner,"Deleted Product",`The product ${product.title} has been deleted!`)
+
+            res.redirect("/")
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    //CREAR UN PRODUCTO
+    async createProduct(req,res)
+    {        
+        try{            
+            const product = await productRepository.createProduct(req.body)
+            
+            res.status(200).redirect("/")
+        }
+        catch(error){
+            res.status(500)
+            console.log(error)
+        }
+    }        
 }
 
 

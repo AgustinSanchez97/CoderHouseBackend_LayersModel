@@ -9,7 +9,6 @@ deleteCartEvent.addEventListener("click", (eventData)=>{
     eventData.preventDefault();
 
     const data = {cartId}
-    //console.log(cartId)
     
     fetch(`/api/carts/${cartId}`,{
         method: "delete",
