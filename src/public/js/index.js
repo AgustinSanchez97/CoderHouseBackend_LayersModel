@@ -12,6 +12,9 @@ if(userRole == "admin")
     specialProducts.forEach(element => {
         element.style.display = "inline-block"
     });
+    purchaseLimitations.forEach(element => {
+        if(element.getAttribute("data-id") != "null") element.style.display = "none"
+    });
 }
 
 else if(userRole == "premium")
