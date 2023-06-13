@@ -82,8 +82,8 @@ class usersController {
                         restoreDate : new Date()
                     }
                     //const newLink = `http://localhost:8080/api/users/changePassword/${data.restoreCode}`
-                    const newLink = `${__dirname}/api/users/changePassword/${data.restoreCode}`
-
+                    let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+                    const newLink = `${fullUrl}api/users/changePassword/${data.restoreCode}`
                     await sendMail.sendMailSimple(user[0].email,"Restore Password",`Enter the link to change the password! ${newLink}`)
                     usersDao.update(user[0].id,data)
                 }
@@ -269,6 +269,7 @@ class usersController {
             //CHAT ACTUAL SINO EXISTE LO CREO
             if(actualChat.length == 0) actualChat = await chatDao.create({chatDate:actualDate})
             const chatId = actualChat[0].id
+            console.log(chatId)
             
             //SI FUERA PUBLICO EL CHAT ESTARIA ASI, PERO ES NECESARIO LOGGEARSE PARA USARLO
             let name = ""

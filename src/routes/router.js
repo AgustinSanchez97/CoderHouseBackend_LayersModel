@@ -84,7 +84,7 @@ export default class Router {
     console.log(jwt.verify(token, "coderSecret") )
     const user = jwt.verify(token, "coderSecret");*/
     //if (!policies.includes(user.role.toUpperCase()))    
-    if(!req.session.user) return res.status(404).json({ message: "Not Session data provided" });
+    if(!req.session.user) return res.status(404).redirect("/login");
     if (!policies.includes(req.session.user.role.toUpperCase()))
       return res.status(403).json({ message: "Forbidden" });
     //req.user = user;

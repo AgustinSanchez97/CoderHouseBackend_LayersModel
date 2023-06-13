@@ -11,7 +11,8 @@ class productsController {
     async getAllByPages(req,res)
     {        
         try{            
-         
+            
+            
             const {page,limit,category,sortMethod}= req.query
 
             let products = await productDao.getAllByPages(category,page||1,limit||4,sortMethod)
