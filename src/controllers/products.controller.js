@@ -5,11 +5,12 @@ import sendMail from "../utils/sendMail.js";
 
 
 
+
 class productsController {
     //RENDERIZADO DE PRODUCTOS POR PAGINAS Y METHODOS PARA SORTEAR
     async getAllByPages(req,res)
     {        
-        try{
+        try{            
          
             const {page,limit,category,sortMethod}= req.query
 

@@ -27,6 +27,7 @@ app.use(express.urlencoded({extended: true,}))
 app.use(cookieParser())
 
 
+console.log(__dirname)
 
 app.use(session({
     store: MongoStore.create({

@@ -1,7 +1,7 @@
 
 import usersDao from "../daos/classes/users.dao.js";
 import sendMail from "../utils/sendMail.js";
-import { hashPassword,comparePassword } from "../utils.js";
+import __dirname, { hashPassword,comparePassword,} from "../utils.js";
 import ticketDao from "../daos/classes/ticket.dao.js";
 
 import chatDao from "../daos/classes/chat.dao.js";
@@ -81,7 +81,9 @@ class usersController {
                         restoreCode : Math.random().toString(36).substring(2, 12),
                         restoreDate : new Date()
                     }
-                    const newLink = `http://localhost:8080/api/users/changePassword/${data.restoreCode}`
+                    //const newLink = `http://localhost:8080/api/users/changePassword/${data.restoreCode}`
+                    const newLink = `${__dirname}/api/users/changePassword/${data.restoreCode}`
+
                     await sendMail.sendMailSimple(user[0].email,"Restore Password",`Enter the link to change the password! ${newLink}`)
                     usersDao.update(user[0].id,data)
                 }
