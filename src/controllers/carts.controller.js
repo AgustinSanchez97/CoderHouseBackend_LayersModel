@@ -99,7 +99,7 @@ class cartsController {
         }    
     }
 
-    //CONTROL DEL TICKET DE COMPRA
+    //CONTROL Y CREACION DEL TICKET DE COMPRA
     async checkTicket(req,res)
     {
         try
@@ -162,7 +162,7 @@ class cartsController {
     }
 
 
-    //CREACION DE TICKET DE COMPRA
+    //CREACION DE TICKET DE COMPRA OBSOLETO
     async purchaseTicket(req,res)
     {
         try

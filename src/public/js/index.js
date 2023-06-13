@@ -24,17 +24,13 @@ else if(userRole == "premium")
     });
 
 }
-
-//const adminProductsInterface = document.querySelector("#adminProducts")
-//if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
-
 const adminProductsInterface = document.querySelectorAll(".createProductInterface")
 
 adminProductsInterface.forEach(element => {
     if(element.getAttribute("data-id") == "admin" ||element.getAttribute("data-id") == "premium") element.style.display = "inline-block"
 });
 
-//if(adminProductsInterface.getAttribute("class") == "admin") adminProductsInterface.style.display = "block"
+
 const actualCategory = document.querySelector("#actualCategory")
 const categorySelectedEvent = document.querySelector("#allCategory")
 
@@ -54,7 +50,6 @@ orderSelectedEvent.addEventListener("change",(event)=>
 {
     event.preventDefault()
     console.log(orderSelectedEvent.value)
-    //if(orderSelectedEvent.value == "todos") return window.location.href = `/`
     window.location.href = `/?category=${actualCategory.value}&&sortMethod=${orderSelectedEvent.value}`
 })
 

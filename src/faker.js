@@ -5,11 +5,6 @@ import { faker } from "@faker-js/faker";
 faker.locale = "es";
 
 export const generateTicket = (numberOfProducts = 10) => {
-  /*
-    const numberOfProducts = parseInt(
-    faker.random.numeric(1, { bannedDigits: [0] })
-  );
-   */
   const products = [];
   const date = new Date().toString()
   

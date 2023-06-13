@@ -1,9 +1,4 @@
 
-
-
-
-
-//const textInput = document.querySelector("#chatInput")
 const textBox = document.querySelector("#textBox")
 
 let chatbox = document.querySelector("#chatInput")

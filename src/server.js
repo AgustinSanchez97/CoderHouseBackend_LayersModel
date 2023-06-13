@@ -25,7 +25,6 @@ app.use(express.json())
 //SUBIR EL MAXIMO DE MEGAS PARA DOCUMENTOS
 app.use(express.urlencoded({extended: true,}))
 app.use(cookieParser())
-//app.use(addLogger)
 
 
 
@@ -44,9 +43,6 @@ app.use(session({
     resave:false,
     saveUninitialized:false
 }))
-
-//VARIABLES DE ENTORNO
-//console.log(config)
 
 
 mongoose.set("strictQuery",true)
@@ -74,21 +70,11 @@ app.engine("hbs", handlebars.engine(
     }
 ))
 
-    
-
-
-
 //Routers
 app.use("/", router)
 
 import swaggerDocs from "./utils/swagger.js"
 
-
 app.use("/api/docs", swaggerDocs)
 
 app.listen(config.port,() => {console.log("Escuchando en el puerto 8080")})
-
-
-
-
-

@@ -14,8 +14,11 @@ export default class viewRoutes extends Router {
         //get para ver datos recibidos en json
         this.get("/:cid", ["PUBLIC"],cartsController.cartJsonData)
 
-        //realizacion de la compra y del ticket
+        //Dejo esta ruta para mostrar que en realidad no hace falta validar la cantidad de productos 
+        //porque lo controlo desde el front pero la nueva funcion de abajo esta como pide la consigna (independiente del front)
         //this.get("/:cid/purchase", ["PREMIUM","USER"], cartsController.purchaseTicket)
+
+        //realizacion de la compra y del ticket
         this.get("/:cid/purchase", ["PREMIUM","USER"], cartsController.checkTicket)
 
         //borrar producto especifico de carrito

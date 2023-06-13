@@ -99,11 +99,9 @@ const initializePassport = () =>{
             async (username,password,done)=>{    
                 try{
                     const user = await userModel.findOne({email:username})
-                    //console.log(user)
                     if(user == null) return done(null,false)
                     if(!comparePassword(user,password)) return done(null,false)
                     
-                    //await sendMail.sendMailSimple(user.email,"Welcome to the Website","Welcome!")
                     return done(null,user)
                 }
                 catch(error){

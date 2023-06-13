@@ -3,16 +3,7 @@ import express from 'express';
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-  
-  /*
-import { Router } from "express";
-  
-  
-const router = Router()
 
-
-router.get("/recoverPassword/", usersController.recoverByEmail)
-*/
 const app = express();
 
 const swaggerOptions = {

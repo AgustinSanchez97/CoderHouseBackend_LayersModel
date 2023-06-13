@@ -6,10 +6,7 @@ import fs from "fs"
 
 import usersController from "../controllers/user.controller.js";
 
-/*
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const imageTypes= ["image/png","image/jpg"]*/
+
 
 const profileDocumentsUpload = multer({
     storage: multer.diskStorage({
@@ -42,14 +39,6 @@ const profileDocumentsUpload = multer({
         }
 
     }),
-    /*
-    fileFilter:(req,file,callback)=>{
-        if(pdfTypes.includes(file.mimetype)) callback(null, true)
-        else callback(new error(`Only ${pdfTypes.join("")} formats are allowed`))
-    },
-    limits:{
-        fileSize: 10000000,
-    },*/
 })
 
 
