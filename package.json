@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test:mocha": "mocha test/mochaTest.test.js && exit 1",
     "test:super": "mocha test/superTest.test.js"

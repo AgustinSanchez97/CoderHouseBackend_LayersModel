@@ -10,8 +10,11 @@ class SendMail {
       port: 465,
       secure:true,
       auth: {
-        user: config.mail_user,
-        pass: config.mail_pass
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
+
+        //user: config.mail_user,        
+        //pass: config.mail_pass
       }
   });
 }
@@ -22,7 +25,7 @@ class SendMail {
 
 
     const info = await this.transporter.sendMail({
-      from: config.mail_from,
+      from: process.env.MAIL_FROM,
       to,
       subject,
       text

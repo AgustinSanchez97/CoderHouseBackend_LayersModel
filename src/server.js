@@ -30,7 +30,8 @@ app.use(cookieParser())
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl:"mongodb+srv://coder:coder123@coderhousehosting.xowlbyk.mongodb.net/ecommerce?retryWrites=true&w=majority",
+        //mongoUrl:config.mongo_uri,
+        mongoUrl:process.env.MONGO_URI,
         mongoOptions: {
             useNewUrlParser:true,
             useUnifiedTopology:true
@@ -44,9 +45,11 @@ app.use(session({
     saveUninitialized:false
 }))
 
+//mongoose.connect(config.mongo_uri,{
 
 mongoose.set("strictQuery",true)
-mongoose.connect("mongodb+srv://coder:coder123@coderhousehosting.xowlbyk.mongodb.net/ecommerce?retryWrites=true&w=majority",{
+mongoose.connect(process.env.MONGO_URI,{
+
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
@@ -76,5 +79,7 @@ app.use("/", router)
 import swaggerDocs from "./utils/swagger.js"
 
 app.use("/api/docs", swaggerDocs)
+const port = process.env.PORT || 8080
+//const port = config.port || 8080
 
-app.listen(config.port,() => {console.log("Escuchando en el puerto 8080")})
+app.listen(port,() => {console.log("Escuchando en el puerto 8080")})
