@@ -80,10 +80,9 @@ class usersController {
                     const data = {                        
                         restoreCode : Math.random().toString(36).substring(2, 12),
                         restoreDate : new Date()
-                    }
-                    //const newLink = `http://localhost:8080/api/users/changePassword/${data.restoreCode}`
-                    let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
-                    const newLink = `${fullUrl}api/users/changePassword/${data.restoreCode}`
+                    }                    
+                    let fullUrl = req.protocol + '://' + req.get('host')
+                    const newLink = `${fullUrl}/api/users/changePassword/${data.restoreCode}`                    
                     await sendMail.sendMailSimple(user[0].email,"Restore Password",`Enter the link to change the password! ${newLink}`)
                     usersDao.update(user[0].id,data)
                 }
